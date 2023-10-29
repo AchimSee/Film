@@ -26,7 +26,7 @@ import {
     startServer,
 } from '../testserver.js';
 import { type GraphQLRequest } from '@apollo/server';
-import { type GraphQLResponseBody } from './buch-query.resolver.test.js';
+import { type GraphQLResponseBody } from './film-query.resolver.test.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginGraphQL } from '../login.js';
 
@@ -62,7 +62,7 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    test('Neues Buch', async () => {
+    test('Neuen Film', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -119,7 +119,7 @@ describe('GraphQL Mutations', () => {
 
     // -------------------------------------------------------------------------
     // eslint-disable-next-line max-lines-per-function
-    test('Buch mit ungueltigen Werten neu anlegen', async () => {
+    test('Film mit ungueltigen Werten neu anlegen', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -187,7 +187,7 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    test('Neues Buch nur als "admin"/"fachabteilung"', async () => {
+    test('Neuen Film nur als "admin"/"fachabteilung"', async () => {
         // given
         const token = await loginGraphQL(client, 'adriana.alpha', 'p');
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -243,7 +243,7 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    test('Buch aktualisieren', async () => {
+    test('Film aktualisieren', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -293,7 +293,7 @@ describe('GraphQL Mutations', () => {
 
     // -------------------------------------------------------------------------
     // eslint-disable-next-line max-lines-per-function
-    test('Buch mit ungueltigen Werten aktualisieren', async () => {
+    test('Film mit ungueltigen Werten aktualisieren', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -359,7 +359,7 @@ describe('GraphQL Mutations', () => {
 
     // -------------------------------------------------------------------------
     // eslint-disable-next-line max-lines-per-function
-    test('Nicht-vorhandenes Buch aktualisieren', async () => {
+    test('Nicht-vorhandenen Film aktualisieren', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -413,7 +413,7 @@ describe('GraphQL Mutations', () => {
         const { message, path, extensions } = error;
 
         expect(message).toBe(
-            `Es gibt kein Buch mit der ID ${id.toLowerCase()}.`,
+            `Es gibt kein Film mit der ID ${id.toLowerCase()}.`,
         );
         expect(path).toBeDefined();
         expect(path!![0]).toBe('update');
@@ -422,7 +422,7 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    test('Buch loeschen', async () => {
+    test('Film loeschen', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention

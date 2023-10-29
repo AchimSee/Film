@@ -15,10 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// Tests mit
+//  * jest      https://jestjs.io
+//  * Mocha     https://mochajs.org
+//  * node:test ab Node 18 https://nodejs.org/download/rc/v18.0.0-rc.1/docs/api/test.html
+
+// https://github.com/testjavascript/nodejs-integration-tests-best-practices
 // axios: https://github.com/axios/axios
-//  - wird von @nestjs/terminus verwendet
-//  - einfacher als das "fetch API", das ab Node 17.5.0 verfuegbar ist
-//    https://github.com/nodejs/node/pull/41749
 
 // Alternativen zu axios:
 // https://github.com/request/request/issues/3143
@@ -39,18 +42,22 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuchModel } from '../../src/buch/rest/buch-get.controller.js';
+import { type BuchModel } from '../../src/film/rest/film-get.controller.js';
+import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const idVorhanden = '1';
+const idNichtVorhanden = '999999';
+const idVorhandenETag = '1';
 
 // -----------------------------------------------------------------------------
 // T e s t s
 // -----------------------------------------------------------------------------
 // Test-Suite
+// eslint-disable-next-line max-lines-per-function
 describe('GET /rest/:id', () => {
     let client: AxiosInstance;
 
@@ -69,7 +76,7 @@ describe('GET /rest/:id', () => {
         await shutdownServer();
     });
 
-    test('Buch zu vorhandener ID', async () => {
+    test('Film zu vorhandener ID', async () => {
         // given
         const url = `/${idVorhanden}`;
 
@@ -85,8 +92,42 @@ describe('GET /rest/:id', () => {
         // eslint-disable-next-line no-underscore-dangle
         const selfLink = data._links.self.href;
 
-        // https://jestjs.io/docs/next/snapshot-testing
-        // https://medium.com/swlh/easy-integration-testing-of-graphql-apis-with-jest-63288d0ad8d7
-        expect(selfLink).toMatchSnapshot();
+        // eslint-disable-next-line security-node/non-literal-reg-expr
+        expect(selfLink).toMatch(new RegExp(`${url}$`, 'u'));
+    });
+
+    test('Kein Film zu nicht-vorhandener ID', async () => {
+        // given
+        const url = `/${idNichtVorhanden}`;
+
+        // when
+        const response: AxiosResponse<ErrorResponse> = await client.get(url);
+
+        // then
+        const { status, data } = response;
+
+        expect(status).toBe(HttpStatus.NOT_FOUND);
+
+        const { error, message, statusCode } = data;
+
+        expect(error).toBe('Not Found');
+        expect(message).toEqual(expect.stringContaining(message));
+        expect(statusCode).toBe(HttpStatus.NOT_FOUND);
+    });
+
+    test('Film zu vorhandener ID mit ETag', async () => {
+        // given
+        const url = `/${idVorhandenETag}`;
+
+        // when
+        const response: AxiosResponse<string> = await client.get(url, {
+            headers: { 'If-None-Match': '"0"' }, // eslint-disable-line @typescript-eslint/naming-convention
+        });
+
+        // then
+        const { status, data } = response;
+
+        expect(status).toBe(HttpStatus.NOT_MODIFIED);
+        expect(data).toBe('');
     });
 });
