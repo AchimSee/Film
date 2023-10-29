@@ -1,0 +1,54 @@
+# Copyright (C) 2023 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Aufruf:   docker compose up
+
+services:
+  trivy:
+    image: owasp/dependency-check:8.4.0
+    command:
+      - '--scan'
+      - '/dependency-check/src'
+      - '--format'
+      - 'ALL'
+      - '--project'
+      - 'film'
+      - '--out'
+      - '/dependency-check/report'
+      - '--suppression'
+      - '/dependency-check/suppression.xml'
+    volumes:
+      - type: bind
+        source: ../../..
+        target: /dependency-check/src
+      - type: bind
+        source: C:/Zimmermann/dependency-check-data
+        target: /usr/share/dependency-check/data
+      - type: bind
+        source: ../../doc/dependency-check
+        target: /dependency-check/report
+      - type: bind
+        source: ./suppression.xml
+        target: /dependency-check/suppression.xml
+    container_name: dependency-check
+    cap_drop: [ALL]
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '2.0'
+          memory: 4G
