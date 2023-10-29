@@ -163,7 +163,7 @@ describe('GraphQL Queries', () => {
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(titel: "${titelVorhanden}") {
+                    filme(titel: "${titelVorhanden}") {
                         art
                         titel {
                             titel
@@ -188,11 +188,11 @@ describe('GraphQL Queries', () => {
 
         expect(data.data).toBeDefined();
 
-        const { buecher } = data.data!;
+        const { filme } = data.data!;
 
-        expect(buecher).not.toHaveLength(0);
+        expect(filme).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = buecher;
+        const buecherArray: BuchDTO[] = filme;
 
         expect(buecherArray).toHaveLength(1);
 
@@ -206,7 +206,7 @@ describe('GraphQL Queries', () => {
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(titel: "${teilTitelVorhanden}") {
+                    filme(titel: "${teilTitelVorhanden}") {
                         art
                         titel {
                             titel
@@ -230,11 +230,11 @@ describe('GraphQL Queries', () => {
         expect(data.errors).toBeUndefined();
         expect(data.data).toBeDefined();
 
-        const { buecher } = data.data!;
+        const { filme } = data.data!;
 
-        expect(buecher).not.toHaveLength(0);
+        expect(filme).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = buecher;
+        const buecherArray: BuchDTO[] = filme;
         buecherArray
             .map((film) => film.titel)
             .forEach((titel) =>
@@ -249,7 +249,7 @@ describe('GraphQL Queries', () => {
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(titel: "${teilTitelNichtVorhanden}") {
+                    filme(titel: "${teilTitelNichtVorhanden}") {
                         art
                         titel {
                             titel
@@ -270,7 +270,7 @@ describe('GraphQL Queries', () => {
 
         expect(status).toBe(HttpStatus.OK);
         expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.data!.buecher).toBeNull();
+        expect(data.data!.filme).toBeNull();
 
         const { errors } = data;
 
@@ -279,9 +279,9 @@ describe('GraphQL Queries', () => {
         const [error] = errors!;
         const { message, path, extensions } = error;
 
-        expect(message).toMatch(/^Keine Buecher gefunden:/u);
+        expect(message).toMatch(/^Keine Filme gefunden:/u);
         expect(path).toBeDefined();
-        expect(path!![0]).toBe('buecher');
+        expect(path!![0]).toBe('filme');
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
