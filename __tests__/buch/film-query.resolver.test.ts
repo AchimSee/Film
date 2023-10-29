@@ -25,7 +25,7 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type Buch } from '../../src/buch/entity/buch.entity.js';
+import { type Film } from '../../src/film/entity/film.entity.js';
 import { type GraphQLFormattedError } from 'graphql';
 import { type GraphQLRequest } from '@apollo/server';
 import { HttpStatus } from '@nestjs/common';
@@ -36,8 +36,8 @@ export interface GraphQLResponseBody {
     errors?: readonly [GraphQLFormattedError];
 }
 
-type BuchDTO = Omit<
-    Buch,
+type FilmDTO = Omit<
+    Film,
     'abbildungen' | 'aktualisiert' | 'erzeugt' | 'rabatt'
 > & {
     rabatt: string;
@@ -77,12 +77,12 @@ describe('GraphQL Queries', () => {
         await shutdownServer();
     });
 
-    test('Buch zu vorhandener ID', async () => {
+    test('Film zu vorhandener ID', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
                 {
-                    buch(id: "${idVorhanden}") {
+                    film(id: "${idVorhanden}") {
                         version
                         isbn
                         art
@@ -108,21 +108,21 @@ describe('GraphQL Queries', () => {
         expect(data.errors).toBeUndefined();
         expect(data.data).toBeDefined();
 
-        const { buch } = data.data!;
-        const result: BuchDTO = buch;
+        const { film } = data.data!;
+        const result: BuchDTO = film;
 
         expect(result.titel?.titel).toMatch(/^\w/u);
         expect(result.version).toBeGreaterThan(-1);
         expect(result.id).toBeUndefined();
     });
 
-    test('Buch zu nicht-vorhandener ID', async () => {
+    test('Film zu nicht-vorhandener ID', async () => {
         // given
         const id = '999999';
         const body: GraphQLRequest = {
             query: `
                 {
-                    buch(id: "${id}") {
+                    film(id: "${id}") {
                         titel {
                             titel
                         }
@@ -142,7 +142,7 @@ describe('GraphQL Queries', () => {
 
         expect(status).toBe(HttpStatus.OK);
         expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.data!.buch).toBeNull();
+        expect(data.data!.film).toBeNull();
 
         const { errors } = data;
 
@@ -151,14 +151,14 @@ describe('GraphQL Queries', () => {
         const [error] = errors!;
         const { message, path, extensions } = error;
 
-        expect(message).toBe(`Es gibt kein Buch mit der ID ${id}.`);
+        expect(message).toBe(`Es gibt kein Film mit der ID ${id}.`);
         expect(path).toBeDefined();
-        expect(path!![0]).toBe('buch');
+        expect(path!![0]).toBe('film');
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
-    test('Buch zu vorhandenem Titel', async () => {
+    test('Film zu vorhandenem Titel', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
@@ -196,12 +196,12 @@ describe('GraphQL Queries', () => {
 
         expect(buecherArray).toHaveLength(1);
 
-        const [buch] = buecherArray;
+        const [film] = buecherArray;
 
-        expect(buch!.titel?.titel).toBe(titelVorhanden);
+        expect(film!.titel?.titel).toBe(titelVorhanden);
     });
 
-    test('Buch zu vorhandenem Teil-Titel', async () => {
+    test('Film zu vorhandenem Teil-Titel', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
@@ -236,7 +236,7 @@ describe('GraphQL Queries', () => {
 
         const buecherArray: BuchDTO[] = buecher;
         buecherArray
-            .map((buch) => buch.titel)
+            .map((film) => film.titel)
             .forEach((titel) =>
                 expect(titel?.titel.toLowerCase()).toEqual(
                     expect.stringContaining(teilTitelVorhanden),
@@ -244,7 +244,7 @@ describe('GraphQL Queries', () => {
             );
     });
 
-    test('Buch zu nicht vorhandenem Titel', async () => {
+    test('Film zu nicht vorhandenem Titel', async () => {
         // given
         const body: GraphQLRequest = {
             query: `

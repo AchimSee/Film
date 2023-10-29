@@ -25,7 +25,7 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuecherModel } from '../../src/buch/rest/buch-get.controller.js';
+import { type BuecherModel } from '../../src/film/rest/film-get.controller.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 
@@ -76,7 +76,7 @@ describe('GET /rest', () => {
         const { buecher } = data._embedded;
 
         buecher
-            .map((buch) => buch._links.self.href)
+            .map((film) => film._links.self.href)
             .forEach((selfLink) => {
                 // eslint-disable-next-line security/detect-non-literal-regexp, security-node/non-literal-reg-expr
                 expect(selfLink).toMatch(new RegExp(`^${baseURL}`, 'u'));
@@ -101,9 +101,9 @@ describe('GET /rest', () => {
 
         const { buecher } = data._embedded;
 
-        // Jedes Buch hat einen Titel mit dem Teilstring 'a'
+        // Jeder Film hat einen Titel mit dem Teilstring 'a'
         buecher
-            .map((buch) => buch.titel)
+            .map((film) => film.titel)
             .forEach((titel) =>
                 expect(titel.titel.toLowerCase()).toEqual(
                     expect.stringContaining(titelVorhanden),
@@ -131,7 +131,7 @@ describe('GET /rest', () => {
         expect(statusCode).toBe(HttpStatus.NOT_FOUND);
     });
 
-    test('Mind. 1 Buch mit vorhandenem Schlagwort', async () => {
+    test('Mind. 1 Film mit vorhandenem Schlagwort', async () => {
         // given
         const params = { [schlagwortVorhanden]: 'true' };
 
@@ -150,9 +150,9 @@ describe('GET /rest', () => {
 
         const { buecher } = data._embedded;
 
-        // Jedes Buch hat im Array der Schlagwoerter z.B. "javascript"
+        // Jeder Film hat im Array der Schlagwoerter z.B. "javascript"
         buecher
-            .map((buch) => buch.schlagwoerter)
+            .map((film) => film.schlagwoerter)
             .forEach((schlagwoerter) =>
                 expect(schlagwoerter).toEqual(
                     expect.arrayContaining([schlagwortVorhanden.toUpperCase()]),

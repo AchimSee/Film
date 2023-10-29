@@ -24,8 +24,8 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuchDTO } from '../../src/buch/rest/buchDTO.entity.js';
-import { BuchReadService } from '../../src/buch/service/buch-read.service.js';
+import { type BuchDTO } from '../../src/film/rest/buchDTO.entity.js';
+import { BuchReadService } from '../../src/film/service/film-read.service.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginRest } from '../login.js';
@@ -111,7 +111,7 @@ describe('POST /rest', () => {
         await shutdownServer();
     });
 
-    test('Neues Buch', async () => {
+    test('Neuen Film', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -145,7 +145,7 @@ describe('POST /rest', () => {
         expect(data).toBe('');
     });
 
-    test('Neues Buch mit ungueltigen Daten', async () => {
+    test('Neuen Film mit ungueltigen Daten', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -180,7 +180,7 @@ describe('POST /rest', () => {
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
 
-    test('Neues Buch, aber die ISBN existiert bereits', async () => {
+    test('Neuen Film, aber die ISBN existiert bereits', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -201,7 +201,7 @@ describe('POST /rest', () => {
         expect(statusCode).toBe(HttpStatus.UNPROCESSABLE_ENTITY);
     });
 
-    test('Neues Buch als Kunde', async () => {
+    test('Neuen Film als Kunde', async () => {
         // given
         const token = await loginRest(client, 'adriana.alpha', 'p');
         headers.Authorization = `Bearer ${token}`;
@@ -220,7 +220,7 @@ describe('POST /rest', () => {
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
 
-    test('Neues Buch, aber ohne Token', async () => {
+    test('Neuen Film, aber ohne Token', async () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.post(
             '/rest',
@@ -234,7 +234,7 @@ describe('POST /rest', () => {
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
 
-    test('Neues Buch, aber mit falschem Token', async () => {
+    test('Neuen Film, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         headers.Authorization = `Bearer ${token}`;
