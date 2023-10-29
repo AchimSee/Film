@@ -60,7 +60,7 @@ describe('GET /rest', () => {
         await shutdownServer();
     });
 
-    test('Alle Buecher', async () => {
+    test('Alle Filme', async () => {
         // given
 
         // when
@@ -73,9 +73,9 @@ describe('GET /rest', () => {
         expect(headers['content-type']).toMatch(/json/iu); // eslint-disable-line sonarjs/no-duplicate-string
         expect(data).toBeDefined();
 
-        const { buecher } = data._embedded;
+        const { filme } = data._embedded;
 
-        buecher
+        filme
             .map((film) => film._links.self.href)
             .forEach((selfLink) => {
                 // eslint-disable-next-line security/detect-non-literal-regexp, security-node/non-literal-reg-expr
@@ -83,7 +83,7 @@ describe('GET /rest', () => {
             });
     });
 
-    test('Buecher mit einem Teil-Titel suchen', async () => {
+    test('Filme mit einem Teil-Titel suchen', async () => {
         // given
         const params = { titel: titelVorhanden };
 
@@ -99,10 +99,10 @@ describe('GET /rest', () => {
         expect(headers['content-type']).toMatch(/json/iu);
         expect(data).toBeDefined();
 
-        const { buecher } = data._embedded;
+        const { filme } = data._embedded;
 
         // Jeder Film hat einen Titel mit dem Teilstring 'a'
-        buecher
+        filme
             .map((film) => film.titel)
             .forEach((titel) =>
                 expect(titel.titel.toLowerCase()).toEqual(
@@ -111,7 +111,7 @@ describe('GET /rest', () => {
             );
     });
 
-    test('Buecher zu einem nicht vorhandenen Teil-Titel suchen', async () => {
+    test('Filme zu einem nicht vorhandenen Teil-Titel suchen', async () => {
         // given
         const params = { titel: titelNichtVorhanden };
 
@@ -148,10 +148,10 @@ describe('GET /rest', () => {
         // JSON-Array mit mind. 1 JSON-Objekt
         expect(data).toBeDefined();
 
-        const { buecher } = data._embedded;
+        const { filme } = data._embedded;
 
         // Jeder Film hat im Array der Schlagwoerter z.B. "javascript"
-        buecher
+        filme
             .map((film) => film.schlagwoerter)
             .forEach((schlagwoerter) =>
                 expect(schlagwoerter).toEqual(
@@ -160,7 +160,7 @@ describe('GET /rest', () => {
             );
     });
 
-    test('Keine Buecher zu einem nicht vorhandenen Schlagwort', async () => {
+    test('Keine Filme zu einem nicht vorhandenen Schlagwort', async () => {
         // given
         const params = { [schlagwortNichtVorhanden]: 'true' };
 
@@ -180,7 +180,7 @@ describe('GET /rest', () => {
         expect(statusCode).toBe(HttpStatus.NOT_FOUND);
     });
 
-    test('Keine Buecher zu einer nicht-vorhandenen Property', async () => {
+    test('Keine Filme zu einer nicht-vorhandenen Property', async () => {
         // given
         const params = { foo: 'bar' };
 
