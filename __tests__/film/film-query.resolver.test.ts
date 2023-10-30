@@ -109,7 +109,7 @@ describe('GraphQL Queries', () => {
         expect(data.data).toBeDefined();
 
         const { film } = data.data!;
-        const result: BuchDTO = film;
+        const result: FilmDTO = film;
 
         expect(result.titel?.titel).toMatch(/^\w/u);
         expect(result.version).toBeGreaterThan(-1);
@@ -192,7 +192,7 @@ describe('GraphQL Queries', () => {
 
         expect(filme).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = filme;
+        const buecherArray: FilmDTO[] = filme;
 
         expect(buecherArray).toHaveLength(1);
 
@@ -234,7 +234,7 @@ describe('GraphQL Queries', () => {
 
         expect(filme).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = filme;
+        const buecherArray: FilmDTO[] = filme;
         buecherArray
             .map((film) => film.titel)
             .forEach((titel) =>
