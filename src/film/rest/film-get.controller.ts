@@ -89,7 +89,7 @@ export type FilmModel = Omit<
 };
 
 // Film-Objekte mit HATEOAS-Links in einem JSON-Array.
-export interface FilmModel {
+export interface FilmeModel {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _embedded: {
         filme: FilmModel[];
