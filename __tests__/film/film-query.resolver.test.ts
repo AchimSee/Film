@@ -84,7 +84,7 @@ describe('GraphQL Queries', () => {
                 {
                     film(id: "${idVorhanden}") {
                         version
-                        isbn
+                        isan
                         genere
                         titel {
                             titel

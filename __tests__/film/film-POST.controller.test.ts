@@ -34,7 +34,7 @@ import { loginRest } from '../login.js';
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const neuesBuch: BuchDTO = {
-    isbn: '978-0-007-00644-1',
+    isan: '978-0-007-00644-1',
     rating: 1,
     genere: 'Action',
     preis: 99.99,
@@ -55,7 +55,7 @@ const neuesBuch: BuchDTO = {
     ],
 };
 const neuesBuchInvalid: Record<string, unknown> = {
-    isbn: 'falsche-ISBN',
+    isan: 'falsche-ISAN',
     rating: -1,
     genere: 'Action',
     preis: -1,
@@ -68,19 +68,19 @@ const neuesBuchInvalid: Record<string, unknown> = {
         untertitel: 'Untertitelinvalid',
     },
 };
-const neuesBuchIsbnExistiert: BuchDTO = {
-    isbn: '978-3-897-22583-1',
+const neuesBuchIsanExistiert: BuchDTO = {
+    isan: '978-3-897-22583-1',
     rating: 1,
     genere: 'Horror',
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
     datum: '2022-02-28',
-    homepage: 'https://post.isbn/',
+    homepage: 'https://post.isan/',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
     titel: {
-        titel: 'Titelpostisbn',
-        untertitel: 'Untertitelpostisbn',
+        titel: 'Titelpostisan',
+        untertitel: 'Untertitelpostisan',
     },
     schauspieler: undefined,
 };
@@ -150,7 +150,7 @@ describe('POST /rest', () => {
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
+            expect.stringMatching(/^isan /u),
             expect.stringMatching(/^rating /u),
             expect.stringMatching(/^genere /u),
             expect.stringMatching(/^preis /u),
@@ -180,7 +180,7 @@ describe('POST /rest', () => {
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
 
-    test('Neuen Film, aber die ISBN existiert bereits', async () => {
+    test('Neuen Film, aber die ISAN existiert bereits', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -188,7 +188,7 @@ describe('POST /rest', () => {
         // when
         const response: AxiosResponse<ErrorResponse> = await client.post(
             '/rest',
-            neuesBuchIsbnExistiert,
+            neuesBuchIsanExistiert,
             { headers },
         );
 
@@ -197,7 +197,7 @@ describe('POST /rest', () => {
 
         const { message, statusCode } = data;
 
-        expect(message).toEqual(expect.stringContaining('ISBN'));
+        expect(message).toEqual(expect.stringContaining('ISAN'));
         expect(statusCode).toBe(HttpStatus.UNPROCESSABLE_ENTITY);
     });
 

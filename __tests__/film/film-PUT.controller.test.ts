@@ -33,7 +33,7 @@ import { loginRest } from '../login.js';
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const geaendertesBuch: BuchDtoOhneRef = {
-    isbn: '978-0-201-63361-0',
+    isan: '978-0-201-63361-0',
     rating: 5,
     genere: 'Action',
     preis: 3333,
@@ -46,7 +46,7 @@ const geaendertesBuch: BuchDtoOhneRef = {
 const idVorhanden = '30';
 
 const geaendertesBuchIdNichtVorhanden: BuchDtoOhneRef = {
-    isbn: '978-0-007-09732-6',
+    isan: '978-0-007-09732-6',
     rating: 4,
     genere: 'Action',
     preis: 44.4,
@@ -59,7 +59,7 @@ const geaendertesBuchIdNichtVorhanden: BuchDtoOhneRef = {
 const idNichtVorhanden = '999999';
 
 const geaendertesBuchInvalid: Record<string, unknown> = {
-    isbn: 'falsche-ISBN',
+    isan: 'falsche-ISAN',
     rating: -1,
     genere: 'Action',
     preis: -1,
@@ -71,7 +71,7 @@ const geaendertesBuchInvalid: Record<string, unknown> = {
 };
 
 const veraltesBuch: BuchDtoOhneRef = {
-    isbn: '978-0-007-09732-6',
+    isan: '978-0-007-09732-6',
     rating: 1,
     genere: 'Comedy',
     preis: 44.4,
@@ -157,7 +157,7 @@ describe('PUT /rest/:id', () => {
         headers.Authorization = `Bearer ${token}`;
         headers['If-Match'] = '"0"';
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
+            expect.stringMatching(/^isan /u),
             expect.stringMatching(/^rating /u),
             expect.stringMatching(/^genere /u),
             expect.stringMatching(/^preis /u),

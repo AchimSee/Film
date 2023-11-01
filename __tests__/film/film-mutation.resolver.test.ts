@@ -71,7 +71,7 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isbn: "978-0-321-19368-1",
+                            isan: "978-0-321-19368-1",
                             rating: 1,
                             genere: Horror,
                             preis: 99.99,
@@ -85,8 +85,8 @@ describe('GraphQL Mutations', () => {
                                 untertitel: "untertitelcreatemutation"
                             },
                             schauspieler: [{
-                                beschriftung: "Abb. 1",
-                                contentType: "img/png"
+                                vorname: "Heinz",
+                                nachname: "Rühmann"
                             }]
                         }
                     ) {
@@ -128,7 +128,7 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isbn: "falsche-ISBN",
+                            isan: "falsche-ISAN",
                             rating: -1,
                             genere: Drama,
                             preis: -1,
@@ -147,7 +147,7 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
+            expect.stringMatching(/^isan /u),
             expect.stringMatching(/^rating /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^rabatt /u),
@@ -196,7 +196,7 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isbn: "978-3-663-08746-5",
+                            isan: "978-3-663-08746-5",
                             rating: 1,
                             genere: Action,
                             preis: 11.1,
@@ -254,7 +254,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "40",
                             version: 0,
-                            isbn: "978-0-007-09732-6",
+                            isan: "978-0-007-09732-6",
                             rating: 5,
                             genere: Drama,
                             preis: 444.44,
@@ -305,7 +305,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
-                            isbn: "falsche-ISBN",
+                            isan: "falsche-ISAN",
                             rating: -1,
                             genere: Comedy,
                             preis: -1,
@@ -322,7 +322,7 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
+            expect.stringMatching(/^isan /u),
             expect.stringMatching(/^rating /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^rabatt /u),
@@ -371,7 +371,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
-                            isbn: "978-0-007-09732-6",
+                            isan: "978-0-007-09732-6",
                             rating: 5,
                             genere: Fantasy,
                             preis: 99.99,

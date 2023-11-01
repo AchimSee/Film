@@ -136,7 +136,7 @@ describe('GET /rest', () => {
         const params = { [schlagwortVorhanden]: 'true' };
 
         // when
-        const response: AxiosResponse<BuecherModel> = await client.get('/', {
+        const response: AxiosResponse<FilmeModel> = await client.get('/', {
             params,
         });
 
