@@ -24,7 +24,7 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuchDtoOhneRef } from '../../src/film/rest/buchDTO.entity.js';
+import { type FilmDtoOhneRef } from '../../src/film/rest/filmDTO.entity.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginRest } from '../login.js';
@@ -32,7 +32,7 @@ import { loginRest } from '../login.js';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const geaendertesBuch: BuchDtoOhneRef = {
+const geaenderterFilm: FilmDtoOhneRef = {
     isan: '978-0-201-63361-0',
     rating: 5,
     genre: 'Action',
@@ -45,10 +45,10 @@ const geaendertesBuch: BuchDtoOhneRef = {
 };
 const idVorhanden = '30';
 
-const geaendertesBuchIdNichtVorhanden: BuchDtoOhneRef = {
+const geaenderterFilmIdNichtVorhanden: FilmDtoOhneRef = {
     isan: '978-0-007-09732-6',
     rating: 4,
-    genre: 'Action',
+    genre: 'ACTION',
     preis: 44.4,
     rabatt: 0.044,
     lieferbar: true,
@@ -58,7 +58,7 @@ const geaendertesBuchIdNichtVorhanden: BuchDtoOhneRef = {
 };
 const idNichtVorhanden = '999999';
 
-const geaendertesBuchInvalid: Record<string, unknown> = {
+const geaendertesFilmInvalid: Record<string, unknown> = {
     isan: 'falsche-ISAN',
     rating: -1,
     genre: 'Action',
@@ -70,10 +70,10 @@ const geaendertesBuchInvalid: Record<string, unknown> = {
     homepage: 'anyHomepage',
 };
 
-const veraltesBuch: BuchDtoOhneRef = {
+const veralterFilm: FilmDtoOhneRef = {
     isan: '978-0-007-09732-6',
     rating: 1,
-    genre: 'Comedy',
+    genre: 'COMEDY',
     preis: 44.4,
     rabatt: 0.044,
     lieferbar: true,
@@ -119,7 +119,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<string> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderterFilm,
             { headers },
         );
 
@@ -140,7 +140,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<string> = await client.put(
             url,
-            geaendertesBuchIdNichtVorhanden,
+            geaenderterFilmIdNichtVorhanden,
             { headers },
         );
 
@@ -169,7 +169,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.put(
             url,
-            geaendertesBuchInvalid,
+            geaenderterFilmInvalid,
             { headers },
         );
 
@@ -196,7 +196,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<string> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderterFilm,
             { headers },
         );
 
@@ -217,7 +217,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<ErrorResponse> = await client.put(
             url,
-            veraltesBuch,
+            veralterFilm,
             { headers },
         );
 
@@ -241,7 +241,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderterFilm,
             { headers },
         );
 
@@ -261,7 +261,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderterFilm,
             { headers },
         );
 
