@@ -24,8 +24,8 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuchDTO } from '../../src/film/rest/buchDTO.entity.js';
-import { BuchReadService } from '../../src/film/service/film-read.service.js';
+import { type FilmDTO } from '../../src/film/rest/filmDTO.entity.js';
+import { FilmReadService } from '../../src/film/service/film-read.service.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginRest } from '../login.js';
@@ -33,10 +33,10 @@ import { loginRest } from '../login.js';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const neuesBuch: BuchDTO = {
+const neuerFilm: FilmDTO = {
     isan: '978-0-007-00644-1',
     rating: 1,
-    genere: 'Action',
+    genre: 'ACTION',
     preis: 99.99,
     rabatt: 0.123,
     lieferbar: true,
@@ -49,15 +49,15 @@ const neuesBuch: BuchDTO = {
     },
     schauspieler: [
         {
-            beschriftung: 'Abb. 1',
-            contentType: 'img/png',
+            vorname: 'Heinz',
+            nachname: 'Leien',
         },
     ],
 };
-const neuesBuchInvalid: Record<string, unknown> = {
+const neuerFilmInvalid: Record<string, unknown> = {
     isan: 'falsche-ISAN',
     rating: -1,
-    genere: 'Action',
+    genre: 'Action',
     preis: -1,
     rabatt: 2,
     lieferbar: true,
@@ -68,10 +68,10 @@ const neuesBuchInvalid: Record<string, unknown> = {
         untertitel: 'Untertitelinvalid',
     },
 };
-const neuesBuchIsanExistiert: BuchDTO = {
+const neuerFilmIsanExistiert: FilmDTO = {
     isan: '978-3-897-22583-1',
     rating: 1,
-    genere: 'Horror',
+    genre: 'Horror',
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
@@ -111,7 +111,7 @@ describe('POST /rest', () => {
         await shutdownServer();
     });
 
-    test('Neuen Film', async () => {
+    test('Neuer Film', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -119,7 +119,7 @@ describe('POST /rest', () => {
         // when
         const response: AxiosResponse<string> = await client.post(
             '/rest',
-            neuesBuch,
+            neuerFilm,
             { headers },
         );
 
@@ -140,19 +140,19 @@ describe('POST /rest', () => {
         const idStr = location.slice(indexLastSlash + 1);
 
         expect(idStr).toBeDefined();
-        expect(BuchReadService.ID_PATTERN.test(idStr)).toBe(true);
+        expect(FilmReadService.ID_PATTERN.test(idStr)).toBe(true);
 
         expect(data).toBe('');
     });
 
-    test('Neuen Film mit ungueltigen Daten', async () => {
+    test('Neuer Film mit ungueltigen Daten', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         const expectedMsg = [
             expect.stringMatching(/^isan /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^genere /u),
+            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^rabatt /u),
             expect.stringMatching(/^datum /u),
@@ -163,7 +163,7 @@ describe('POST /rest', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.post(
             '/rest',
-            neuesBuchInvalid,
+            neuerFilmInvalid,
             { headers },
         );
 
@@ -180,7 +180,7 @@ describe('POST /rest', () => {
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
 
-    test('Neuen Film, aber die ISAN existiert bereits', async () => {
+    test('Neuer Film, aber die ISAN existiert bereits', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -188,7 +188,7 @@ describe('POST /rest', () => {
         // when
         const response: AxiosResponse<ErrorResponse> = await client.post(
             '/rest',
-            neuesBuchIsanExistiert,
+            neuerFilmIsanExistiert,
             { headers },
         );
 
@@ -201,7 +201,7 @@ describe('POST /rest', () => {
         expect(statusCode).toBe(HttpStatus.UNPROCESSABLE_ENTITY);
     });
 
-    test('Neuen Film als Kunde', async () => {
+    test('Neuer Film als Kunde', async () => {
         // given
         const token = await loginRest(client, 'adriana.alpha', 'p');
         headers.Authorization = `Bearer ${token}`;
@@ -209,7 +209,7 @@ describe('POST /rest', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.post(
             '/rest',
-            neuesBuch,
+            neuerFilm,
             { headers },
         );
 
@@ -220,11 +220,11 @@ describe('POST /rest', () => {
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
 
-    test('Neuen Film, aber ohne Token', async () => {
+    test('Neuer Film, aber ohne Token', async () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.post(
             '/rest',
-            neuesBuch,
+            neuerFilm,
         );
 
         // then
@@ -234,7 +234,7 @@ describe('POST /rest', () => {
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
 
-    test('Neuen Film, aber mit falschem Token', async () => {
+    test('Neuer Film, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         headers.Authorization = `Bearer ${token}`;
@@ -242,7 +242,7 @@ describe('POST /rest', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.post(
             '/rest',
-            neuesBuch,
+            neuerFilm,
             { headers },
         );
 

@@ -35,7 +35,7 @@ import { loginRest } from '../login.js';
 const geaendertesBuch: BuchDtoOhneRef = {
     isan: '978-0-201-63361-0',
     rating: 5,
-    genere: 'Action',
+    genre: 'Action',
     preis: 3333,
     rabatt: 0.33,
     lieferbar: true,
@@ -48,7 +48,7 @@ const idVorhanden = '30';
 const geaendertesBuchIdNichtVorhanden: BuchDtoOhneRef = {
     isan: '978-0-007-09732-6',
     rating: 4,
-    genere: 'Action',
+    genre: 'Action',
     preis: 44.4,
     rabatt: 0.044,
     lieferbar: true,
@@ -61,7 +61,7 @@ const idNichtVorhanden = '999999';
 const geaendertesBuchInvalid: Record<string, unknown> = {
     isan: 'falsche-ISAN',
     rating: -1,
-    genere: 'Action',
+    genre: 'Action',
     preis: -1,
     rabatt: 2,
     lieferbar: true,
@@ -73,7 +73,7 @@ const geaendertesBuchInvalid: Record<string, unknown> = {
 const veraltesBuch: BuchDtoOhneRef = {
     isan: '978-0-007-09732-6',
     rating: 1,
-    genere: 'Comedy',
+    genre: 'Comedy',
     preis: 44.4,
     rabatt: 0.044,
     lieferbar: true,
@@ -159,7 +159,7 @@ describe('PUT /rest/:id', () => {
         const expectedMsg = [
             expect.stringMatching(/^isan /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^genere /u),
+            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^rabatt /u),
             expect.stringMatching(/^datum /u),
