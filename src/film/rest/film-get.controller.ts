@@ -89,7 +89,7 @@ export type FilmModel = Omit<
 };
 
 // Film-Objekte mit HATEOAS-Links in einem JSON-Array.
-export interface FilmeModel {
+export interface FilmModel {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _embedded: {
         buecher: FilmModel[];
@@ -259,7 +259,7 @@ export class FilmGetController {
         @Query() query: FilmQuery,
         @Req() req: Request,
         @Res() res: Response,
-    ): Promise<Response<FilmeModel | undefined>> {
+    ): Promise<Response<FilmModel | undefined>> {
         this.#logger.debug('get: query=%o', query);
         if (req.accepts([APPLICATION_HAL_JSON, 'json', 'html']) === false) {
             this.#logger.debug('get: accepted=%o', req.accepted);
@@ -269,12 +269,12 @@ export class FilmGetController {
         const filme = await this.#service.find(query);
         this.#logger.debug('get: %o', filme);
 
-        const filmeModel = filme.map((film) =>
+        const FilmModel = filme.map((film) =>
             this.#toModel(film, req, false),
         );
-        this.#logger.debug('get: filmeModel=%o', filmeModel);
+        this.#logger.debug('get: filmModel=%o', filmModel);
 
-        const result: FilmeModel = { _embedded: { filme: filmeModel } };
+        const result: FilmModel = { _embedded: { filme: filmModel } };
         return res.contentType(APPLICATION_HAL_JSON).json(result).send();
     }
 
