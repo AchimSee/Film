@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
+ * Copyright (C) 2021 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,10 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+import { HealthController } from './health.controller.js';
+import { HttpModule } from '@nestjs/axios';
+import { Module } from '@nestjs/common';
+import { TerminusModule } from '@nestjs/terminus';
 
-import { type Film } from './film.entity.js';
-import { type Schauspieler } from './schauspieler.entity.js';
-import { type Titel } from './titel.entity.js';
-
-// erforderlich in src/config/db.ts und src/buch/buch.module.ts
-export const entities: [Film, Titel, Schauspieler];
+@Module({
+    imports: [TerminusModule, HttpModule],
+    controllers: [HealthController],
+})
+export class HealthModule {}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
+ * Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,10 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+import { Global, Module } from '@nestjs/common';
+import { BannerService } from './banner.service.js';
+import { ResponseTimeInterceptor } from './response-time.interceptor.js';
 
-import { type Film } from './film.entity.js';
-import { type Schauspieler } from './schauspieler.entity.js';
-import { type Titel } from './titel.entity.js';
+/**
+ * Das Modul besteht aus allgemeinen Services, z.B. MailService.
+ * @packageDocumentation
+ */
 
-// erforderlich in src/config/db.ts und src/buch/buch.module.ts
-export const entities: [Film, Titel, Schauspieler];
+/**
+ * Die dekorierte Modul-Klasse mit den Service-Klassen.
+ */
+@Global()
+@Module({
+    providers: [BannerService, ResponseTimeInterceptor],
+    exports: [BannerService, ResponseTimeInterceptor],
+})
+export class LoggerModule {}

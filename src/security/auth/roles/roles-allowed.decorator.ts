@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
+ * Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+import { type Role } from '../service/role.js';
+import { SetMetadata } from '@nestjs/common';
 
-import { type Film } from './film.entity.js';
-import { type Schauspieler } from './schauspieler.entity.js';
-import { type Titel } from './titel.entity.js';
-
-// erforderlich in src/config/db.ts und src/buch/buch.module.ts
-export const entities: [Film, Titel, Schauspieler];
+export const ROLES_KEY = 'roles';
+// Rest Parameter: beliebig viele Parameter als Array zusammenfassen, seit ES 2015
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const RolesAllowed = (...roles: Role[]) => SetMetadata(ROLES_KEY, roles);

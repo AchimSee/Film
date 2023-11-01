@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
+ * Copyright (C) 2023 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,9 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { type Film } from './film.entity.js';
-import { type Schauspieler } from './schauspieler.entity.js';
-import { type Titel } from './titel.entity.js';
+/**
+ * Das Modul enthält den Namen des DB-Typs: postgres, mysql oder sqlite.
+ * @packageDocumentation
+ */
 
-// erforderlich in src/config/db.ts und src/buch/buch.module.ts
-export const entities: [Film, Titel, Schauspieler];
+import { config } from './app.js';
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const type: string | undefined = config.db?.type;
+
+// 'better-sqlite3' erfordert Python zum Uebersetzen, wenn das Docker-Image gebaut wird
+export const dbType =
+    type === 'postgres' || type === 'mysql' || type === 'sqlite'
+        ? (type as string)
+        : 'postgres';
