@@ -92,7 +92,7 @@ export type FilmModel = Omit<
 export interface FilmModel {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _embedded: {
-        buecher: FilmModel[];
+        filme: FilmModel[];
     };
 }
 

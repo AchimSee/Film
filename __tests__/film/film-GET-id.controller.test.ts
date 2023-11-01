@@ -42,7 +42,7 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuchModel } from '../../src/film/rest/film-get.controller.js';
+import { type FilmModel } from '../../src/film/rest/film-get.controller.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 
@@ -81,7 +81,7 @@ describe('GET /rest/:id', () => {
         const url = `/${idVorhanden}`;
 
         // when
-        const response: AxiosResponse<BuchModel> = await client.get(url);
+        const response: AxiosResponse<FilmModel> = await client.get(url);
 
         // then
         const { status, headers, data } = response;
