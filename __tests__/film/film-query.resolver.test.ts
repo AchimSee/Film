@@ -85,7 +85,7 @@ describe('GraphQL Queries', () => {
                     film(id: "${idVorhanden}") {
                         version
                         isbn
-                        art
+                        genere
                         titel {
                             titel
                         }
@@ -164,7 +164,7 @@ describe('GraphQL Queries', () => {
             query: `
                 {
                     filme(titel: "${titelVorhanden}") {
-                        art
+                        genere
                         titel {
                             titel
                         }
@@ -207,7 +207,7 @@ describe('GraphQL Queries', () => {
             query: `
                 {
                     filme(titel: "${teilTitelVorhanden}") {
-                        art
+                        genere
                         titel {
                             titel
                         }
@@ -250,7 +250,7 @@ describe('GraphQL Queries', () => {
             query: `
                 {
                     filme(titel: "${teilTitelNichtVorhanden}") {
-                        art
+                        genere
                         titel {
                             titel
                         }

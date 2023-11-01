@@ -74,7 +74,7 @@ describe('GET /rest/:id', () => {
         const url = `/${idVorhanden}`;
 
         // when
-        const response: AxiosResponse<BuchModel> = await client.get(url);
+        const response: AxiosResponse<FilmModel> = await client.get(url);
 
         // then
         const { status, headers, data } = response;

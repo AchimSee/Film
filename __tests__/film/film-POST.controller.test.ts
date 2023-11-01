@@ -36,7 +36,7 @@ import { loginRest } from '../login.js';
 const neuesBuch: BuchDTO = {
     isbn: '978-0-007-00644-1',
     rating: 1,
-    art: 'DRUCKAUSGABE',
+    genere: 'Action',
     preis: 99.99,
     rabatt: 0.123,
     lieferbar: true,
@@ -57,7 +57,7 @@ const neuesBuch: BuchDTO = {
 const neuesBuchInvalid: Record<string, unknown> = {
     isbn: 'falsche-ISBN',
     rating: -1,
-    art: 'UNSICHTBAR',
+    genere: 'Action',
     preis: -1,
     rabatt: 2,
     lieferbar: true,
@@ -71,7 +71,7 @@ const neuesBuchInvalid: Record<string, unknown> = {
 const neuesBuchIsbnExistiert: BuchDTO = {
     isbn: '978-3-897-22583-1',
     rating: 1,
-    art: 'DRUCKAUSGABE',
+    genere: 'Horror',
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
@@ -152,7 +152,7 @@ describe('POST /rest', () => {
         const expectedMsg = [
             expect.stringMatching(/^isbn /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^art /u),
+            expect.stringMatching(/^genere /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^rabatt /u),
             expect.stringMatching(/^datum /u),

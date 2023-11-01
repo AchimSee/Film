@@ -35,7 +35,7 @@ import { loginRest } from '../login.js';
 const geaendertesBuch: BuchDtoOhneRef = {
     isbn: '978-0-201-63361-0',
     rating: 5,
-    art: 'KINDLE',
+    genere: 'Action',
     preis: 3333,
     rabatt: 0.33,
     lieferbar: true,
@@ -48,7 +48,7 @@ const idVorhanden = '30';
 const geaendertesBuchIdNichtVorhanden: BuchDtoOhneRef = {
     isbn: '978-0-007-09732-6',
     rating: 4,
-    art: 'DRUCKAUSGABE',
+    genere: 'Action',
     preis: 44.4,
     rabatt: 0.044,
     lieferbar: true,
@@ -61,7 +61,7 @@ const idNichtVorhanden = '999999';
 const geaendertesBuchInvalid: Record<string, unknown> = {
     isbn: 'falsche-ISBN',
     rating: -1,
-    art: 'UNSICHTBAR',
+    genere: 'Action',
     preis: -1,
     rabatt: 2,
     lieferbar: true,
@@ -73,7 +73,7 @@ const geaendertesBuchInvalid: Record<string, unknown> = {
 const veraltesBuch: BuchDtoOhneRef = {
     isbn: '978-0-007-09732-6',
     rating: 1,
-    art: 'DRUCKAUSGABE',
+    genere: 'Comedy',
     preis: 44.4,
     rabatt: 0.044,
     lieferbar: true,
@@ -159,7 +159,7 @@ describe('PUT /rest/:id', () => {
         const expectedMsg = [
             expect.stringMatching(/^isbn /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^art /u),
+            expect.stringMatching(/^genere /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^rabatt /u),
             expect.stringMatching(/^datum /u),
