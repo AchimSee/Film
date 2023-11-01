@@ -47,7 +47,7 @@ const neuesBuch: BuchDTO = {
         titel: 'Titelpost',
         untertitel: 'untertitelpos',
     },
-    abbildungen: [
+    schauspieler: [
         {
             beschriftung: 'Abb. 1',
             contentType: 'img/png',
@@ -82,7 +82,7 @@ const neuesBuchIsbnExistiert: BuchDTO = {
         titel: 'Titelpostisbn',
         untertitel: 'Untertitelpostisbn',
     },
-    abbildungen: undefined,
+    schauspieler: undefined,
 };
 
 // -----------------------------------------------------------------------------

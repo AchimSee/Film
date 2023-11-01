@@ -84,7 +84,7 @@ describe('GraphQL Mutations', () => {
                                 titel: "Titelcreatemutation",
                                 untertitel: "untertitelcreatemutation"
                             },
-                            abbildungen: [{
+                            schauspieler: [{
                                 beschriftung: "Abb. 1",
                                 contentType: "img/png"
                             }]

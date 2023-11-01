@@ -38,7 +38,7 @@ export interface GraphQLResponseBody {
 
 type FilmDTO = Omit<
     Film,
-    'abbildungen' | 'aktualisiert' | 'erzeugt' | 'rabatt'
+    'schauspieler' | 'aktualisiert' | 'erzeugt' | 'rabatt'
 > & {
     rabatt: string;
 };
