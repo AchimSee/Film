@@ -63,11 +63,11 @@ export class FilmWriteService {
      * @throws IsanExists falls die ISAN-Nummer bereits existiert
      */
     async create(film: Film): Promise<number> {
-        this.#logger.debug('create: buch=%o', film);
+        this.#logger.debug('create: film=%o', film);
         await this.#validateCreate(film);
 
         const filmDb = await this.#repo.save(film); // implizite Transaktion
-        this.#logger.debug('create: buchDb=%o', filmDb);
+        this.#logger.debug('create: filmDb=%o', filmDb);
 
         await this.#sendmail(filmDb);
 
@@ -86,7 +86,7 @@ export class FilmWriteService {
     // https://2ality.com/2015/01/es6-destructuring.html#simulating-named-parameters-in-javascript
     async update({ id, film, version }: UpdateParams): Promise<number> {
         this.#logger.debug(
-            'update: id=%d, buch=%o, version=%s',
+            'update: id=%d, film=%o, version=%s',
             id,
             film,
             version,

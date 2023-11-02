@@ -33,7 +33,7 @@ export interface Suchkriterien {
 }
 
 /**
- * Die Klasse `BuchReadService` implementiert das Lesen für Bücher und greift
+ * Die Klasse `FilmReadService` implementiert das Lesen für Bücher und greift
  * mit _TypeORM_ auf eine relationale DB zu.
  */
 @Injectable()
@@ -128,7 +128,7 @@ export class FilmReadService {
         // Das Resultat ist eine leere Liste, falls nichts gefunden
         // Lesen: Keine Transaktion erforderlich
         const filme = await this.#queryBuilder.build(suchkriterien).getMany();
-        this.#logger.debug('find: buecher=%o', filme);
+        this.#logger.debug('find: filme=%o', filme);
         if (filme.length === 0) {
             throw new NotFoundException(
                 `Keine Filme gefunden: ${JSON.stringify(suchkriterien)}`,
