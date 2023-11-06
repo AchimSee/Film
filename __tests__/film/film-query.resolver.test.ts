@@ -38,7 +38,7 @@ export interface GraphQLResponseBody {
 
 type FilmDTO = Omit<
     Film,
-    'abbildungen' | 'aktualisiert' | 'erzeugt' | 'rabatt'
+    'schauspieler' | 'aktualisiert' | 'erzeugt' | 'rabatt'
 > & {
     rabatt: string;
 };
@@ -84,8 +84,8 @@ describe('GraphQL Queries', () => {
                 {
                     film(id: "${idVorhanden}") {
                         version
-                        isbn
-                        art
+                        isan
+                        genre
                         titel {
                             titel
                         }
@@ -164,7 +164,7 @@ describe('GraphQL Queries', () => {
             query: `
                 {
                     filme(titel: "${titelVorhanden}") {
-                        art
+                        genre
                         titel {
                             titel
                         }
@@ -207,7 +207,7 @@ describe('GraphQL Queries', () => {
             query: `
                 {
                     filme(titel: "${teilTitelVorhanden}") {
-                        art
+                        genre
                         titel {
                             titel
                         }
@@ -250,7 +250,7 @@ describe('GraphQL Queries', () => {
             query: `
                 {
                     filme(titel: "${teilTitelNichtVorhanden}") {
-                        art
+                        genre
                         titel {
                             titel
                         }

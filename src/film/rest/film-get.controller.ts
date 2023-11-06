@@ -1,4 +1,21 @@
-// eslint-disable max-lines
+/* eslint-disable max-lines */
+/*
+ * Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 /**
  * Das Modul besteht aus der Controller-Klasse für Lesen an der REST-Schnittstelle.
  * @packageDocumentation
@@ -15,11 +32,6 @@ import {
     ApiResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import { type Film, type FilmGenre } from '../entity/film.entity.js';
-import {
-    FilmReadService,
-    type Suchkriterien,
-} from '../service/film-read.service.js';
 import {
     Controller,
     Get,
@@ -31,13 +43,17 @@ import {
     Res,
     UseInterceptors,
 } from '@nestjs/common';
+import { type Film, type FilmGenre } from '../entity/film.entity.js';
+import {
+    FilmReadService,
+    type Suchkriterien,
+} from '../service/film-read.service.js';
 import { Request, Response } from 'express';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { type Titel } from '../entity/titel.entity.js';
-import { getBaseUri } from './getBaseUri.js';
+import { getBaseUri } from './getBaseuri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config.paths.js';
-import { log } from 'console';
 
 // href-Link für HATEOAS
 export interface Link {
@@ -76,7 +92,7 @@ export type FilmModel = Omit<
 export interface FilmeModel {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _embedded: {
-        buecher: FilmModel[];
+        filme: FilmModel[];
     };
 }
 
@@ -142,6 +158,28 @@ export class FilmGetController {
         this.#service = service;
     }
 
+    /**
+     * Ein Film wird asynchron anhand seiner ID als Pfadparameter gesucht.
+     *
+     * Falls es ein solchen Film gibt und `If-None-Match` im Request-Header
+     * auf die aktuelle Version des Films gesetzt war, wird der Statuscode
+     * `304` (`Not Modified`) zurückgeliefert. Falls `If-None-Match` nicht
+     * gesetzt ist oder eine veraltete Version enthält, wird der gefundene
+     * Film im Rumpf des Response als JSON-Datensatz mit Atom-Links für HATEOAS
+     * und dem Statuscode `200` (`OK`) zurückgeliefert.
+     *
+     * Falls es kein Film zur angegebenen ID gibt, wird der Statuscode `404`
+     * (`Not Found`) zurückgeliefert.
+     *
+     * @param id Pfad-Parameter `id`
+     * @param req Request-Objekt von Express mit Pfadparameter, Query-String,
+     *            Request-Header und Request-Body.
+     * @param version Versionsnummer im Request-Header bei `If-None-Match`
+     * @param accept Content-Type bzw. MIME-Type
+     * @param res Leeres Response-Objekt von Express.
+     * @returns Leeres Promise-Objekt.
+     */
+    // eslint-disable-next-line max-params
     @Get(':id')
     @ApiOperation({ summary: 'Suche mit der Film-ID' })
     @ApiParam({
@@ -162,7 +200,7 @@ export class FilmGetController {
     async getById(
         @Param('id') idStr: string,
         @Req() req: Request,
-        @Headers('If-None-Match') version: String | undefined,
+        @Headers('If-None-Match') version: string | undefined,
         @Res() res: Response,
     ): Promise<Response<FilmModel | undefined>> {
         this.#logger.debug('getById: idStr=%s, version=%s', idStr, version);
@@ -193,14 +231,14 @@ export class FilmGetController {
         res.header('Etag', `"${versionDb}"`);
 
         // HATEOAS mit Atom Links und HAL (= Hypertext Application Language)
-        const FilmModel = this.#toModel(buch, req);
+        const filmModel = this.#toModel(film, req);
         this.#logger.debug('getById: filmModel=%o', filmModel);
         return res.contentType(APPLICATION_HAL_JSON).json(filmModel);
     }
 
     /**
      * Filme werden mit Query-Parametern asynchron gesucht. Falls es mindestens
-     * ein solches Buch gibt, wird der Statuscode `200` (`OK`) gesetzt. Im Rumpf
+     * ein solche gibt, wird der Statuscode `200` (`OK`) gesetzt. Im Rumpf
      * des Response ist das JSON-Array mit den gefundenen Büchern, die jeweils
      * um Atom-Links für HATEOAS ergänzt sind.
      *
@@ -221,22 +259,22 @@ export class FilmGetController {
         @Query() query: FilmQuery,
         @Req() req: Request,
         @Res() res: Response,
-    ): Promise<Response<FilmeModel | undefined>> {
+    ): Promise<Response<FilmModel | undefined>> {
         this.#logger.debug('get: query=%o', query);
         if (req.accepts([APPLICATION_HAL_JSON, 'json', 'html']) === false) {
-            this.#logger.debug('get: accepted=%o', req.accepted); 
+            this.#logger.debug('get: accepted=%o', req.accepted);
             return res.sendStatus(HttpStatus.NOT_ACCEPTABLE);
         }
 
         const filme = await this.#service.find(query);
         this.#logger.debug('get: %o', filme);
 
-        const filmeModel = filme.map((film) =>
+        const FilmModel = filme.map((film) =>
             this.#toModel(film, req, false),
         );
-        this.#logger.debug('get: filmeModel=%o', filmeModel);
+        this.#logger.debug('get: filmModel=%o', filmModel);
 
-        const result: FilmeModel = { _embedded: { filme: filmeModel } };
+        const result: FilmModel = { _embedded: { filme: filmModel } };
         return res.contentType(APPLICATION_HAL_JSON).json(result).send();
     }
 
@@ -259,8 +297,9 @@ export class FilmGetController {
             titel: film.titel?.titel ?? 'N/A', // eslint-disable-line unicorn/consistent-destructuring
             untertitel: film.titel?.untertitel ?? 'N/A', // eslint-disable-line unicorn/consistent-destructuring
         };
-        // eslint-disable unicorn/consistent-destructuring 
+        /* eslint-disable unicorn/consistent-destructuring */
         const filmModel: FilmModel = {
+            isan: film.isan,
             rating: film.rating,
             genre: film.genre,
             preis: film.preis,
@@ -272,8 +311,9 @@ export class FilmGetController {
             titel: titelModel,
             _links: links,
         };
-        // eslint-enable unicorn/consistent-destructuring 
+        /* eslint-enable unicorn/consistent-destructuring */
 
         return filmModel;
     }
 }
+/* eslint-enable max-lines */

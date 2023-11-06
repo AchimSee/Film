@@ -24,7 +24,7 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuchDtoOhneRef } from '../../src/film/rest/buchDTO.entity.js';
+import { type FilmDtoOhneRef } from '../../src/film/rest/filmDTO.entity.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginRest } from '../login.js';
@@ -32,10 +32,10 @@ import { loginRest } from '../login.js';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const geaendertesBuch: BuchDtoOhneRef = {
-    isbn: '978-0-201-63361-0',
+const geaenderterFilm: FilmDtoOhneRef = {
+    isan: '978-0-201-63361-0',
     rating: 5,
-    art: 'KINDLE',
+    genre: 'Action',
     preis: 3333,
     rabatt: 0.33,
     lieferbar: true,
@@ -45,10 +45,10 @@ const geaendertesBuch: BuchDtoOhneRef = {
 };
 const idVorhanden = '30';
 
-const geaendertesBuchIdNichtVorhanden: BuchDtoOhneRef = {
-    isbn: '978-0-007-09732-6',
+const geaenderterFilmIdNichtVorhanden: FilmDtoOhneRef = {
+    isan: '978-0-007-09732-6',
     rating: 4,
-    art: 'DRUCKAUSGABE',
+    genre: 'ACTION',
     preis: 44.4,
     rabatt: 0.044,
     lieferbar: true,
@@ -58,10 +58,10 @@ const geaendertesBuchIdNichtVorhanden: BuchDtoOhneRef = {
 };
 const idNichtVorhanden = '999999';
 
-const geaendertesBuchInvalid: Record<string, unknown> = {
-    isbn: 'falsche-ISBN',
+const geaendertesFilmInvalid: Record<string, unknown> = {
+    isan: 'falsche-ISAN',
     rating: -1,
-    art: 'UNSICHTBAR',
+    genre: 'Action',
     preis: -1,
     rabatt: 2,
     lieferbar: true,
@@ -70,10 +70,10 @@ const geaendertesBuchInvalid: Record<string, unknown> = {
     homepage: 'anyHomepage',
 };
 
-const veraltesBuch: BuchDtoOhneRef = {
-    isbn: '978-0-007-09732-6',
+const veralterFilm: FilmDtoOhneRef = {
+    isan: '978-0-007-09732-6',
     rating: 1,
-    art: 'DRUCKAUSGABE',
+    genre: 'COMEDY',
     preis: 44.4,
     rabatt: 0.044,
     lieferbar: true,
@@ -119,7 +119,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<string> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderterFilm,
             { headers },
         );
 
@@ -140,7 +140,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<string> = await client.put(
             url,
-            geaendertesBuchIdNichtVorhanden,
+            geaenderterFilmIdNichtVorhanden,
             { headers },
         );
 
@@ -157,9 +157,9 @@ describe('PUT /rest/:id', () => {
         headers.Authorization = `Bearer ${token}`;
         headers['If-Match'] = '"0"';
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
+            expect.stringMatching(/^isan /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^art /u),
+            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^rabatt /u),
             expect.stringMatching(/^datum /u),
@@ -169,7 +169,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.put(
             url,
-            geaendertesBuchInvalid,
+            geaenderterFilmInvalid,
             { headers },
         );
 
@@ -196,7 +196,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<string> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderterFilm,
             { headers },
         );
 
@@ -217,7 +217,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<ErrorResponse> = await client.put(
             url,
-            veraltesBuch,
+            veralterFilm,
             { headers },
         );
 
@@ -241,7 +241,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderterFilm,
             { headers },
         );
 
@@ -261,7 +261,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderterFilm,
             { headers },
         );
 

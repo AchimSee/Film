@@ -1,4 +1,4 @@
-// eslint-disable max-classes-per-file, @typescript-eslint/no-magic-numbers
+/* eslint-disable max-classes-per-file*/
 /**
  * Das Modul besteht aus der Entity-Klasse.
  * @packageDocumentation
@@ -24,12 +24,20 @@ import { SchauspielerDTO } from './schauspielerDTO.entity.js';
 import { TitelDTO } from './titelDTO.entity.js';
 import { Type } from 'class-transformer';
 
+export const ISAN_REGEX =
+    // eslint-disable-next-line security/detect-unsafe-regex
+    /^(?:[\da-f]{4}-){4}[\da-z](?:-(?:[\da-f]{4}-){2}[\da-z])?$/u;
+
 export const MAX_RATING = 5;
 
 /**
  * Entity-Klasse für Filme ohne TypeORM und ohne Referenzen.
  */
 export class FilmDtoOhneRef {
+    @Matches(ISAN_REGEX)
+    @ApiProperty({ example: '1881-66C7-3420-0000-7', type: String })
+    readonly isan!: string;
+
     @IsInt()
     @Min(0)
     @Max(MAX_RATING)
@@ -86,8 +94,8 @@ export class FilmDTO extends FilmDtoOhneRef {
     @ValidateNested({ each: true })
     @Type(() => SchauspielerDTO)
     @ApiProperty({ type: [SchauspielerDTO] })
-    readonly schauspieler: SchauspielerDTO[] | undefined;
+    readonly mehrereschauspieler: SchauspielerDTO[] | undefined;
 
     // SchauspielerDTO
 }
-/* eslint-enable max-classes-per-file, @typescript-eslint/no-magic-numbers */
+/* eslint-enable max-classes-per-file */

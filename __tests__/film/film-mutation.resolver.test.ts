@@ -71,9 +71,9 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isbn: "978-0-321-19368-1",
+                            isan: "978-0-321-19368-1",
                             rating: 1,
-                            art: KINDLE,
+                            genre: Horror,
                             preis: 99.99,
                             rabatt: 0.123,
                             lieferbar: true,
@@ -84,9 +84,9 @@ describe('GraphQL Mutations', () => {
                                 titel: "Titelcreatemutation",
                                 untertitel: "untertitelcreatemutation"
                             },
-                            abbildungen: [{
-                                beschriftung: "Abb. 1",
-                                contentType: "img/png"
+                            schauspieler: [{
+                                vorname: "Heinz",
+                                nachname: "Rühmann"
                             }]
                         }
                     ) {
@@ -128,9 +128,9 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isbn: "falsche-ISBN",
+                            isan: "falsche-ISAN",
                             rating: -1,
-                            art: KINDLE,
+                            genre: Drama,
                             preis: -1,
                             rabatt: 2,
                             lieferbar: false,
@@ -147,7 +147,7 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
+            expect.stringMatching(/^isan /u),
             expect.stringMatching(/^rating /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^rabatt /u),
@@ -196,9 +196,9 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isbn: "978-3-663-08746-5",
+                            isan: "978-3-663-08746-5",
                             rating: 1,
-                            art: KINDLE,
+                            genre: Action,
                             preis: 11.1,
                             rabatt: 0.011,
                             lieferbar: true,
@@ -254,9 +254,9 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "40",
                             version: 0,
-                            isbn: "978-0-007-09732-6",
+                            isan: "978-0-007-09732-6",
                             rating: 5,
-                            art: KINDLE,
+                            genre Drama,
                             preis: 444.44,
                             rabatt: 0.099,
                             lieferbar: false,
@@ -305,9 +305,9 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
-                            isbn: "falsche-ISBN",
+                            isan: "falsche-ISAN",
                             rating: -1,
-                            art: KINDLE,
+                            genre: Comedy,
                             preis: -1,
                             rabatt: 2,
                             lieferbar: false,
@@ -322,7 +322,7 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
+            expect.stringMatching(/^isan /u),
             expect.stringMatching(/^rating /u),
             expect.stringMatching(/^preis /u),
             expect.stringMatching(/^rabatt /u),
@@ -371,9 +371,9 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
-                            isbn: "978-0-007-09732-6",
+                            isan: "978-0-007-09732-6",
                             rating: 5,
-                            art: DRUCKAUSGABE,
+                            genre: Fantasy,
                             preis: 99.99,
                             rabatt: 0.099,
                             lieferbar: false,
