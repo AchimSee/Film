@@ -100,7 +100,7 @@ input BuchInput {
   homepage: String
   schlagwoerter: [String]
   titel: TitelInput!
-  schauspieler: [SchauspielerInput!]
+  mehrereschauspieler: [SchauspielerInput!]
 }
 
 type CreatePayload {

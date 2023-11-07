@@ -93,7 +93,7 @@ export class FilmReadService {
             );
             if (mitSchauspieler) {
                 this.#logger.debug(
-                    'findById: schauspieler=%o',
+                    'findById: mehrereschauspieler=%o',
                     film.mehrereschauspieler,
                 );
             }
