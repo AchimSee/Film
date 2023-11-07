@@ -24,7 +24,7 @@
 -- https://sqlite.org/lang_createindex.html
 -- https://stackoverflow.com/questions/37619526/how-can-i-change-the-default-sqlite-timezone
 
-CREATE TABLE IF NOT EXISTS buch (
+CREATE TABLE IF NOT EXISTS film (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
     version        INTEGER NOT NULL DEFAULT 0,
     isbn           TEXT NOT NULL UNIQUE,
@@ -39,13 +39,13 @@ CREATE TABLE IF NOT EXISTS buch (
     erzeugt        TEXT NOT NULL,
     aktualisiert   TEXT NOT NULL
 );
-CREATE INDEX IF NOT EXISTS buch_isbn_idx ON buch(isbn);
+CREATE INDEX IF NOT EXISTS buch_isbn_idx ON film(isbn);
 
 CREATE TABLE IF NOT EXISTS titel (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     titel       TEXT NOT NULL,
     untertitel  TEXT,
-    buch_id     INTEGER NOT NULL UNIQUE REFERENCES buch
+    buch_id     INTEGER NOT NULL UNIQUE REFERENCES film
 );
 
 
@@ -53,6 +53,6 @@ CREATE TABLE IF NOT EXISTS abbildung (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     beschriftung    TEXT NOT NULL,
     content_type    TEXT NOT NULL,
-    buch_id         INTEGER NOT NULL REFERENCES buch
+    buch_id         INTEGER NOT NULL REFERENCES film
 );
 CREATE INDEX IF NOT EXISTS abbildung_buch_id_idx ON abbildung(buch_id);
