@@ -152,7 +152,7 @@ describe('GET /rest', () => {
 
         // Jeder Film hat im Array der Schlagwoerter z.B. "javascript"
         filme
-            .map((film: FilmModel) => film.schlagwoerter)
+            .map((film:) => film.schlagwoerter)
             .forEach((schlagwoerter: string[] | undefined) =>
                 expect(schlagwoerter).toEqual(
                     expect.arrayContaining([schlagwortVorhanden.toUpperCase()]),
