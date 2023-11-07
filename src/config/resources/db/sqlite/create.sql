@@ -24,12 +24,12 @@
 -- https://sqlite.org/lang_createindex.html
 -- https://stackoverflow.com/questions/37619526/how-can-i-change-the-default-sqlite-timezone
 
-CREATE TABLE IF NOT EXISTS film (
+CREATE TABLE IF NOT EXISTS buch (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
     version        INTEGER NOT NULL DEFAULT 0,
-    isan           TEXT NOT NULL UNIQUE,
+    isbn           TEXT NOT NULL UNIQUE,
     rating         INTEGER NOT NULL CHECK (rating >= 0 AND rating <= 5),
-    genre            TEXT,
+    art            TEXT,
     preis          REAL,
     rabatt         REAL,
     lieferbar      INTEGER NOT NULL CHECK (lieferbar = 0 OR lieferbar = 1) DEFAULT 0,
@@ -39,34 +39,20 @@ CREATE TABLE IF NOT EXISTS film (
     erzeugt        TEXT NOT NULL,
     aktualisiert   TEXT NOT NULL
 );
-<<<<<<< HEAD
-CREATE INDEX IF NOT EXISTS film_isbn_idx ON film(isbn);
-=======
-CREATE INDEX IF NOT EXISTS buch_isbn_idx ON film(isan);
->>>>>>> 637a25adb4fb459bc20cedc6c42cb34053c732dd
+CREATE INDEX IF NOT EXISTS buch_isbn_idx ON buch(isbn);
 
 CREATE TABLE IF NOT EXISTS titel (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     titel       TEXT NOT NULL,
     untertitel  TEXT,
-<<<<<<< HEAD
-    film_id     INTEGER NOT NULL UNIQUE REFERENCES film
-=======
-    buch_id     INTEGER NOT NULL UNIQUE REFERENCES film
->>>>>>> 637a25adb4fb459bc20cedc6c42cb34053c732dd
+    buch_id     INTEGER NOT NULL UNIQUE REFERENCES buch
 );
 
 
-CREATE TABLE IF NOT EXISTS schauspieler (
+CREATE TABLE IF NOT EXISTS abbildung (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     beschriftung    TEXT NOT NULL,
     content_type    TEXT NOT NULL,
-<<<<<<< HEAD
-    film_id         INTEGER NOT NULL REFERENCES film
+    buch_id         INTEGER NOT NULL REFERENCES buch
 );
-CREATE INDEX IF NOT EXISTS film_id_idx ON schauspieler(film_id);
-=======
-    buch_id         INTEGER NOT NULL REFERENCES film
-);
-CREATE INDEX IF NOT EXISTS abbildung_buch_id_idx ON schauspieler(buch_id);
->>>>>>> 637a25adb4fb459bc20cedc6c42cb34053c732dd
+CREATE INDEX IF NOT EXISTS abbildung_buch_id_idx ON abbildung(buch_id);
