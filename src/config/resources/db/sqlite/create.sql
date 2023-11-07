@@ -27,9 +27,9 @@
 CREATE TABLE IF NOT EXISTS film (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
     version        INTEGER NOT NULL DEFAULT 0,
-    isbn           TEXT NOT NULL UNIQUE,
+    isan           TEXT NOT NULL UNIQUE,
     rating         INTEGER NOT NULL CHECK (rating >= 0 AND rating <= 5),
-    art            TEXT,
+    genre            TEXT,
     preis          REAL,
     rabatt         REAL,
     lieferbar      INTEGER NOT NULL CHECK (lieferbar = 0 OR lieferbar = 1) DEFAULT 0,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS film (
     erzeugt        TEXT NOT NULL,
     aktualisiert   TEXT NOT NULL
 );
-CREATE INDEX IF NOT EXISTS buch_isbn_idx ON film(isbn);
+CREATE INDEX IF NOT EXISTS buch_isbn_idx ON film(isan);
 
 CREATE TABLE IF NOT EXISTS titel (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -49,10 +49,10 @@ CREATE TABLE IF NOT EXISTS titel (
 );
 
 
-CREATE TABLE IF NOT EXISTS abbildung (
+CREATE TABLE IF NOT EXISTS schauspieler (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     beschriftung    TEXT NOT NULL,
     content_type    TEXT NOT NULL,
     buch_id         INTEGER NOT NULL REFERENCES film
 );
-CREATE INDEX IF NOT EXISTS abbildung_buch_id_idx ON abbildung(buch_id);
+CREATE INDEX IF NOT EXISTS abbildung_buch_id_idx ON schauspieler(buch_id);

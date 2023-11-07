@@ -13,7 +13,7 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 export class IsanExistsException extends HttpException {
     constructor(readonly isan: string) {
         super(
-            `Die ISBN-Nummer ${isan} existiert bereits.`,
+            `Die ISAN-Nummer ${isan} existiert bereits.`,
             HttpStatus.UNPROCESSABLE_ENTITY,
         );
     }
