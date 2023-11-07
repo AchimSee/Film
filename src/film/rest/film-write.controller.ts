@@ -35,7 +35,7 @@ import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.
 import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
 import { type Schauspieler } from '../entity/schauspieler.entity.js';
 import { type Titel } from '../entity/titel.entity.js';
-import { getBaseUri } from './getBaseUri.js';
+import { getBaseUri } from './getBaseuri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';
 
