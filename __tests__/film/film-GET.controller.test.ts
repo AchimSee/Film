@@ -64,7 +64,7 @@ describe('GET /rest', () => {
         // given
 
         // when
-        const response: AxiosResponse<FilmModel> = await client.get('/');
+        const response: AxiosResponse<FilmeModel> = await client.get('/');
 
         // then
         const { status, headers, data } = response;
@@ -88,7 +88,7 @@ describe('GET /rest', () => {
         const params = { titel: titelVorhanden };
 
         // when
-        const response: AxiosResponse<FilmModel> = await client.get('/', {
+        const response: AxiosResponse<FilmeModel> = await client.get('/', {
             params,
         });
 
@@ -136,7 +136,7 @@ describe('GET /rest', () => {
         const params = { [schlagwortVorhanden]: 'true' };
 
         // when
-        const response: AxiosResponse<FilmModel> = await client.get('/', {
+        const response: AxiosResponse<FilmeModel> = await client.get('/', {
             params,
         });
 
