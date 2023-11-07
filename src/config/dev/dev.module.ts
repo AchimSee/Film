@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { AuthModule } from '../../security/auth/auth.module.js';
-import { Film } from '../../film/entity/film.entity.js';
 import { DbPopulateService } from './db-populate.service.js';
 import { DevController } from './dev.controller.js';
+import { Film } from '../../film/entity/film.entity.js';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
