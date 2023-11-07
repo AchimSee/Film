@@ -121,15 +121,17 @@ export class FilmMutationResolver {
             untertitel: titelDTO.untertitel,
             film: undefined,
         };
-        const schauspieler = filmDTO.schauspieler?.map((schauspielerDTO) => {
-            const schauspieler: Schauspieler = {
-                id: undefined,
-                vorname: schauspielerDTO.vorname,
-                nachname: schauspielerDTO.nachnameType,
-                film: undefined,
-            };
-            return schauspieler;
-        });
+        const mehrereschauspieler = filmDTO.mehrereschauspieler?.map(
+            (schauspielerDTO) => {
+                const schauspieler: Schauspieler = {
+                    id: undefined,
+                    vorname: schauspielerDTO.vorname,
+                    nachname: schauspielerDTO.nachname,
+                    film: undefined,
+                };
+                return schauspieler;
+            },
+        );
         const film: Film = {
             id: undefined,
             version: undefined,
@@ -143,7 +145,7 @@ export class FilmMutationResolver {
             homepage: filmDTO.homepage,
             schlagwoerter: filmDTO.schlagwoerter,
             titel,
-            schauspieler,
+            mehrereschauspieler,
             erzeugt: undefined,
             aktualisiert: undefined,
         };
@@ -167,7 +169,7 @@ export class FilmMutationResolver {
             homepage: filmDTO.homepage,
             schlagwoerter: filmDTO.schlagwoerter,
             titel: undefined,
-            schauspieler: undefined,
+            mehrereschauspieler: undefined,
             erzeugt: undefined,
             aktualisiert: undefined,
         };
