@@ -18,7 +18,6 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { IsInt, IsNumberString, Min } from 'class-validator';
 import { UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
-import { type Schauspieler } from '../entity/schauspieler.entity.js';
 import { type Film } from '../entity/film.entity.js';
 import { FilmDTO } from '../rest/filmDTO.entity.js';
 import { FilmWriteService } from '../service/film-write.service.js';
@@ -28,6 +27,7 @@ import { JwtAuthGraphQlGuard } from '../../security/auth/jwt/jwt-auth-graphql.gu
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
 import { RolesGraphQlGuard } from '../../security/auth/roles/roles-graphql.guard.js';
+import { type Schauspieler } from '../entity/schauspieler.entity.js';
 import { type Titel } from '../entity/titel.entity.js';
 import { getLogger } from '../../logger/logger.js';
 
