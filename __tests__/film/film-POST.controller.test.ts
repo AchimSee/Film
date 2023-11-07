@@ -71,7 +71,7 @@ const neuerFilmInvalid: Record<string, unknown> = {
 const neuerFilmIsanExistiert: FilmDTO = {
     isan: '978-3-897-22583-1',
     rating: 1,
-    genre: 'Horror',
+    genre: 'HORROR',
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
