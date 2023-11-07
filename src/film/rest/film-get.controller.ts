@@ -274,9 +274,7 @@ export class FilmGetController {
         const filme = await this.#service.find(query);
         this.#logger.debug('get: %o', filme);
 
-        const filmeModel = filme.map((film) =>
-            this.#toModel(film, req, false),
-        );
+        const filmeModel = filme.map((film) => this.#toModel(film, req, false));
         this.#logger.debug('get: filmeModel=%o', filmeModel);
 
         const result: FilmeModel = { _embedded: { filme: filmeModel } };
