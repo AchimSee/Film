@@ -20,12 +20,12 @@
  * @packageDocumentation
  */
 import { BASEDIR, config } from './app.js';
-import { Buch } from '../buch/entity/buch.entity.js';
 import { type DataSourceOptions } from 'typeorm';
+import { Film } from '../film/entity/film.entity.js';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { type TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { dbType } from './dbtype.js';
-import { entities } from '../buch/entity/entities.js';
+import { entities } from '../film/entity/entities.js';
 import { loggerDefaultValue } from './logger.js';
 import { nodeConfig } from './node.js';
 import { readFileSync } from 'node:fs';
@@ -34,11 +34,11 @@ import { resolve } from 'node:path';
 const { db } = config;
 
 // nullish coalescing
-const database = (db?.name as string | undefined) ?? Buch.name.toLowerCase();
+const database = (db?.name as string | undefined) ?? Film.name.toLowerCase();
 
 const host = (db?.host as string | undefined) ?? 'localhost';
 const username =
-    (db?.username as string | undefined) ?? Buch.name.toLowerCase();
+    (db?.username as string | undefined) ?? Film.name.toLowerCase();
 const pass = (db?.password as string | undefined) ?? 'p';
 const passAdmin = (db?.passwordAdmin as string | undefined) ?? 'p';
 
