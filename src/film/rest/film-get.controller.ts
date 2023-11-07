@@ -274,12 +274,12 @@ export class FilmGetController {
         const filme = await this.#service.find(query);
         this.#logger.debug('get: %o', filme);
 
-        const filmModel = filme.map((film) =>
+        const filmeModel = filme.map((film) =>
             this.#toModel(film, req, false),
         );
-        this.#logger.debug('get: filmModel=%o', filmModel);
+        this.#logger.debug('get: filmeModel=%o', filmeModel);
 
-        const result: FilmModel = { _embedded: { filme: filmModel } };
+        const result: FilmeModel = { _embedded: { filme: filmeModel } };
         return res.contentType(APPLICATION_HAL_JSON).json(result).send();
     }
 
