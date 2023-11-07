@@ -178,7 +178,7 @@ export class FilmMutationResolver {
     // #errorMsgCreateFilm(err: CreateError) {
     //     switch (err.type) {
     //         case 'IsbnExists': {
-    //             return `Die ISBN ${err.isbn} existiert bereits`;
+    //             return `Die ISAN ${err.isan} existiert bereits`;
     //         }
     //         default: {
     //             return 'Unbekannter Fehler';
