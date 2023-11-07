@@ -56,9 +56,9 @@ type Buch {
   # ID ist bei Apollo ein String
   id: Int!
   version: Int!
-  isbn: String!
+  isan: String!
   rating: Int
-  art: Art
+  genre: Art
   preis: Float!
   lieferbar: Boolean
   datum: String
@@ -82,7 +82,7 @@ input TitelInput {
   untertitel: String
 }
 
-"Daten zu den Abbildungen eines Buches"
+"Daten zu den schauspielern eines Buches"
 input AbbildungInput {
   beschriftung: String!
   contentType: String!
@@ -90,9 +90,9 @@ input AbbildungInput {
 
 "Daten für ein neues Buch"
 input BuchInput {
-  isbn: String
+  isan: String
   rating: Int
-  art: Art
+  genre: Art
   preis: Float
   rabatt: Float
   lieferbar: Boolean
@@ -100,7 +100,7 @@ input BuchInput {
   homepage: String
   schlagwoerter: [String]
   titel: TitelInput!
-  schauspieler: [SchauspielerInput!]
+  mehrereschauspieler: [SchauspielerInput!]
 }
 
 type CreatePayload {
@@ -111,9 +111,9 @@ type CreatePayload {
 input BuchUpdateInput {
   id: ID
   version: Int
-  isbn: String
+  isan: String
   rating: Int
-  art: Art
+  genre: Art
   preis: Float
   rabatt: Float
   lieferbar: Boolean

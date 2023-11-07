@@ -26,7 +26,7 @@ import {
     startServer,
 } from '../testserver.js';
 import { type ErrorResponse } from './error-response.js';
-import { type FilmModel } from '../../src/film/rest/film-get.controller.js';
+import { type FilmeModel } from '../../src/film/rest/film-get.controller.js';
 import { HttpStatus } from '@nestjs/common';
 
 // -----------------------------------------------------------------------------
@@ -64,7 +64,7 @@ describe('GET /rest', () => {
         // given
 
         // when
-        const response: AxiosResponse<FilmModel> = await client.get('/');
+        const response: AxiosResponse<FilmeModel> = await client.get('/');
 
         // then
         const { status, headers, data } = response;
@@ -88,7 +88,7 @@ describe('GET /rest', () => {
         const params = { titel: titelVorhanden };
 
         // when
-        const response: AxiosResponse<FilmModel> = await client.get('/', {
+        const response: AxiosResponse<FilmeModel> = await client.get('/', {
             params,
         });
 
@@ -136,7 +136,7 @@ describe('GET /rest', () => {
         const params = { [schlagwortVorhanden]: 'true' };
 
         // when
-        const response: AxiosResponse<FilmModel> = await client.get('/', {
+        const response: AxiosResponse<FilmeModel> = await client.get('/', {
             params,
         });
 
@@ -152,8 +152,8 @@ describe('GET /rest', () => {
 
         // Jeder Film hat im Array der Schlagwoerter z.B. "javascript"
         filme
-            .map((film : FilmModel ) => film.schlagwoerter)
-            .forEach((schlagwoerter : string[] | undefined) =>
+            .map((film) => film.schlagwoerter)
+            .forEach((schlagwoerter: string[] | undefined) =>
                 expect(schlagwoerter).toEqual(
                     expect.arrayContaining([schlagwortVorhanden.toUpperCase()]),
                 ),

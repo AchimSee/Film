@@ -84,7 +84,7 @@ describe('GraphQL Mutations', () => {
                                 titel: "Titelcreatemutation",
                                 untertitel: "untertitelcreatemutation"
                             },
-                            schauspieler: [{
+                            mehrereschauspieler: [{
                                 vorname: "Heinz",
                                 nachname: "Rühmann"
                             }]

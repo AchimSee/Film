@@ -58,7 +58,7 @@ export class QueryBuilder {
         );
         if (mitSchauspieler) {
             queryBuilder.leftJoinAndSelect(
-                `${this.#filmAlias}.abbildungen`,
+                `${this.#filmAlias}.mehrereschauspieler`,
                 this.#schauspielerAlias,
             );
         }

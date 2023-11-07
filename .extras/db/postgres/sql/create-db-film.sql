@@ -80,4 +80,4 @@ CREATE DATABASE film;
 GRANT ALL ON DATABASE film TO film;
 
 -- https://www.postgresql.org/docs/10/sql-createtablespace.html
-CREATE TABLESPACE filmspace OWNER film LOCATION '/var/lib/postgresql/tablespace/buch';
+CREATE TABLESPACE filmspace OWNER film LOCATION '/var/lib/postgresql/tablespace/film';

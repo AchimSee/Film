@@ -51,7 +51,7 @@ import {
 import { Request, Response } from 'express';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { type Titel } from '../entity/titel.entity.js';
-import { getBaseUri } from './getBaseuri.js';
+import { getBaseUri } from './getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';
 
@@ -81,7 +81,12 @@ export type TitelModel = Omit<Titel, 'film' | 'id'>;
 // Film-Objekt mit HATEOAS-Links
 export type FilmModel = Omit<
     Film,
-    'schauspieler' | 'aktualisiert' | 'erzeugt' | 'id' | 'titel' | 'version'
+    | 'mehrereschauspieler'
+    | 'aktualisiert'
+    | 'erzeugt'
+    | 'id'
+    | 'titel'
+    | 'version'
 > & {
     titel: TitelModel;
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -269,12 +274,10 @@ export class FilmGetController {
         const filme = await this.#service.find(query);
         this.#logger.debug('get: %o', filme);
 
-        const filmModel = filme.map((film) =>
-            this.#toModel(film, req, false),
-        );
-        this.#logger.debug('get: filmModel=%o', filmModel);
+        const filmeModel = filme.map((film) => this.#toModel(film, req, false));
+        this.#logger.debug('get: filmeModel=%o', filmeModel);
 
-        const result: FilmModel = { _embedded: { filme: filmModel } };
+        const result: FilmeModel = { _embedded: { filme: filmeModel } };
         return res.contentType(APPLICATION_HAL_JSON).json(result).send();
     }
 

@@ -38,7 +38,7 @@ export class Schauspieler {
     @Column('varchar', { length: 32 })
     readonly nachname!: string;
 
-    @ManyToOne(() => Film, (film) => film.schauspieler)
+    @ManyToOne(() => Film, (film) => film.mehrereschauspieler)
     @JoinColumn({ name: 'film_id' })
     film: Film | undefined;
 
