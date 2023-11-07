@@ -47,7 +47,7 @@ const neuerFilm: FilmDTO = {
         titel: 'Titelpost',
         untertitel: 'untertitelpos',
     },
-    schauspieler: [
+    mehrereschauspieler: [
         {
             vorname: 'Heinz',
             nachname: 'Leien',
@@ -82,7 +82,7 @@ const neuerFilmIsanExistiert: FilmDTO = {
         titel: 'Titelpostisan',
         untertitel: 'Untertitelpostisan',
     },
-    schauspieler: undefined,
+    mehrereschauspieler: undefined,
 };
 
 // -----------------------------------------------------------------------------

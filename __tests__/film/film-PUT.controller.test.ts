@@ -35,7 +35,7 @@ import { loginRest } from '../login.js';
 const geaenderterFilm: FilmDtoOhneRef = {
     isan: '978-0-201-63361-0',
     rating: 5,
-    genre: 'Action',
+    genre: 'ACTION',
     preis: 3333,
     rabatt: 0.33,
     lieferbar: true,
@@ -58,10 +58,10 @@ const geaenderterFilmIdNichtVorhanden: FilmDtoOhneRef = {
 };
 const idNichtVorhanden = '999999';
 
-const geaendertesFilmInvalid: Record<string, unknown> = {
+const geaenderterFilmInvalid: Record<string, unknown> = {
     isan: 'falsche-ISAN',
     rating: -1,
-    genre: 'Action',
+    genre: 'ACTION',
     preis: -1,
     rabatt: 2,
     lieferbar: true,
@@ -73,7 +73,7 @@ const geaendertesFilmInvalid: Record<string, unknown> = {
 const veralterFilm: FilmDtoOhneRef = {
     isan: '978-0-007-09732-6',
     rating: 1,
-    genre: 'COMEDY',
+    genre: 'ACTION',
     preis: 44.4,
     rabatt: 0.044,
     lieferbar: true,

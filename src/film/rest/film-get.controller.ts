@@ -53,7 +53,7 @@ import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.
 import { type Titel } from '../entity/titel.entity.js';
 import { getBaseUri } from './getBaseuri.js';
 import { getLogger } from '../../logger/logger.js';
-import { paths } from '../../config.paths.js';
+import { paths } from '../../config/paths.js';
 
 // href-Link für HATEOAS
 export interface Link {
@@ -269,7 +269,7 @@ export class FilmGetController {
         const filme = await this.#service.find(query);
         this.#logger.debug('get: %o', filme);
 
-        const FilmModel = filme.map((film) =>
+        const filmModel = filme.map((film) =>
             this.#toModel(film, req, false),
         );
         this.#logger.debug('get: filmModel=%o', filmModel);

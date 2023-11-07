@@ -130,7 +130,6 @@ export class QueryBuilder {
         }
 
         // Restliche Properties als Key-Value-Paare: Vergleiche auf Gleichheit
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         Object.keys(props).forEach((key) => {
             const param: Record<string, any> = {};
             param[key] = (props as Record<string, any>)[key]; // eslint-disable-line @typescript-eslint/no-unsafe-assignment, security/detect-object-injection
