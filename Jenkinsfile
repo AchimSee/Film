@@ -73,11 +73,11 @@ pipeline {
                 sh 'rm -rf dist'
                 sh 'rm -rf .extras/doc/api'
                 sh 'rm -rf .extras/doc/folien/folien.html'
-                sh 'rm -rf .extras/doc/projekthandbuch/html'
+                sh 'rm -rf .extras/doc/projekthandfilm/html'
 
                 // https://www.jenkins.io/doc/pipeline/steps/git
                 // "named arguments" statt Funktionsaufruf mit Klammern
-                git url: 'https://github.com/juergenzimmermann/buch', branch: 'main', poll: true
+                git url: 'https://github.com/juergenzimmermann/film', branch: 'main', poll: true
             }
         }
 
@@ -128,7 +128,7 @@ pipeline {
                 }
 
                 // /var/jenkins_home ist das Homedirectory vom User "jenkins"
-                // /var/jenkins_home/workspace/buch (siehe "pwd" oben)
+                // /var/jenkins_home/workspace/film (siehe "pwd" oben)
                 sh 'cat package.json'
 
                 // Konfigurationsverzeichnis /root/.npm
@@ -184,10 +184,10 @@ pipeline {
                   //]
 
                   publishHTML (target : [
-                      reportDir: '.extras/doc/projekthandbuch/html',
-                      reportFiles: 'projekthandbuch.html',
-                      reportName: 'Projekthandbuch',
-                      reportTitles: 'Projekthandbuch'
+                      reportDir: '.extras/doc/projekthandfilm/html',
+                      reportFiles: 'projekthandfilm.html',
+                      reportName: 'Projekthandfilm',
+                      reportTitles: 'Projekthandfilm'
                   ])
 
                   publishHTML target : [
@@ -207,14 +207,14 @@ pipeline {
 
                 success {
                     script {
-                        if (fileExists("${env.WORKSPACE}/buch.zip")) {
-                            sh 'rm buch.zip'
+                        if (fileExists("${env.WORKSPACE}/film.zip")) {
+                            sh 'rm film.zip'
                         }
                     }
                     // https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#zip-create-zip-file
-                    zip zipFile: 'buch.zip', archive: false, dir: 'dist'
-                    // jobs/buch/builds/.../archive/buch.zip
-                    archiveArtifacts 'buch.zip'
+                    zip zipFile: 'film.zip', archive: false, dir: 'dist'
+                    // jobs/film/builds/.../archive/film.zip
+                    archiveArtifacts 'film.zip'
                 }
             }
         }
@@ -222,7 +222,7 @@ pipeline {
         stage('Docker Image bauen') {
             steps {
                 echo 'TODO: Docker-Image bauen und veroeffentlichen'
-                // sh 'docker buildx build --tag juergenzimmermann/buch:2023.10.0 .'
+                // sh 'docker buildx build --tag juergenzimmermann/film:2023.10.0 .'
             }
         }
 

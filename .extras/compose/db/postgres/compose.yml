@@ -62,7 +62,7 @@ services:
       - type: bind
         source: C:/Zimmermann/volumes/postgres/csv/film
         target: /csv
-        # read_only: true
+        read_only: true
       - type: bind
         source: C:/Zimmermann/volumes/postgres/sql
         target: /sql

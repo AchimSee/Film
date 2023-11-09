@@ -8,7 +8,7 @@
 
 # Generierte Dateien
 build
-.extras/doc/projekthandbuch/html/*
+.extras/doc/projekthandfilm/html/*
 .extras/doc/folien/*.html
 .extras/doc/api/*
 .extras/doc/dependency-check/*

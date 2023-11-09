@@ -157,16 +157,16 @@ Unterstützung für ESM ist notwendig in:
 
 ### DB-Server
 
-> ❗ Vor dem 1. Start von PostgreSQL muss man die Skripte `create-db-buch.sql`
-> und `create-schema-buch.sql` aus dem Verzeichnis `.extras\db\postgres\sql`
+> ❗ Vor dem 1. Start von PostgreSQL muss man die Skripte `create-db-film.sql`
+> und `create-schema-film.sql` aus dem Verzeichnis `.extras\db\postgres\sql`
 > nach `C:\Zimmermann\volumes\postgres\sql` kopieren und die Anleitung ausführen.
 > Danach kopiert man die CSV-Dateien aus dem Verzeichnis `.extras\postgres\csv`
-> nach `C:\Zimmermann\volumes\postgres\csv\buch`.
+> nach `C:\Zimmermann\volumes\postgres\csv\film`.
 
-> ❗ Vor dem 1. Start von MySQL muss man das Skript `create-db-buch.sql` aus
+> ❗ Vor dem 1. Start von MySQL muss man das Skript `create-db-film.sql` aus
 > dem Projektverzeichnis `.extras\db\mysql\sql` nach`C:\Zimmermann\volumes\mysql\sql`
 > kopieren und die Anleitung ausführen. Danach kopiert man die CSV-Dateien aus
-> dem Verzeichnis `.extras\db\mysql\csv` nach `C:\Zimmermann\volumes\mysql\csv\buch`.
+> dem Verzeichnis `.extras\db\mysql\csv` nach `C:\Zimmermann\volumes\mysql\csv\film`.
 
 Vor dem Start des Appservers muss man den DB-Server und ggf. den DB-Browser starten.
 Falls man _PostgreSQL_ oder _MySQL_ und nicht _SQLite_ als "Embedded Database" nutzt:
@@ -194,7 +194,7 @@ Jetzt läuft der DB-Server mit folgender Konfiguration:
 
 - Rechnername `localhost` aus Windows-Sicht
 - Default-Port `5432` bei _PostgreSQL_ bzw. `3306` bei _MySQL_
-- Datenbankname `buch`
+- Datenbankname `film`
 - Administrations-User `postgres` bei _PostgreSQL_ bzw. `root` bei _MySQL_
 - Passwort `p` für den jeweiligen Administrations-User
 
@@ -258,8 +258,8 @@ verwendet.
 Beim Starten des Appservers wird außerdem mit _TypeORM_ auf die Datenbank
 zugegriffen. Der Benutzername und das Passwort sind in der Datei
 `src\config\db.ts` auf `admin` und `p` voreingestellt. Durch die Property
-`db.populate` in `src\config\resources\buch.yml` wird festgelegt, ob die
-(Test-) DB `buch` neu geladen wird.
+`db.populate` in `src\config\resources\film.yml` wird festgelegt, ob die
+(Test-) DB `film` neu geladen wird.
 
 ## OpenAPI
 
@@ -287,7 +287,7 @@ herunterladen und installieren. Die Installation erfolgt dabei im Verzeichnis
 - Den Menüpunkt _Workspaces_ anklicken
 - Im Drop-Down Menü den Button _Create Workspace_ anklicken
 - Danach den Button _Next_ anklicken
-- Im Eingabefeld _Name_ `buch` und im Eingabefeld _Summary_ z.B.
+- Im Eingabefeld _Name_ `film` und im Eingabefeld _Summary_ z.B.
   `REST- und GraphQL-Requests für den Appserver.`
 - Abschließend den Button _Create_ anklicken.
 
@@ -295,8 +295,8 @@ herunterladen und installieren. Die Installation erfolgt dabei im Verzeichnis
 
 Zunächst legt man ein _Environment_ mit Variablen an. Dazu wählt man am
 linken Rand den Menüpunkt _Environments_, klickt auf den Button `Import`
-und wählt aus dem Verzeichnis `.extras\postman` die Datei `buch.postman_environment.json`
-aus. Jetzt hat man die Umgebung `buch` mit der Variablen `base_url` und dem
+und wählt aus dem Verzeichnis `.extras\postman` die Datei `film.postman_environment.json`
+aus. Jetzt hat man die Umgebung `film` mit der Variablen `base_url` und dem
 Wert `https://localhost:3000` angelegt.
 
 ### Collections und Folders
@@ -409,7 +409,7 @@ z.B.:
 
 ```powershell
     npm exec jest --detectOpenHandles --errorOnDeprecated `
-      --forceExit --runTestsByPath '__tests__\buch\buch-GET.controller.test.ts'
+      --forceExit --runTestsByPath '__tests__\film\film-GET.controller.test.ts'
 ```
 
 ---
@@ -457,15 +457,15 @@ validieren:
 ```powershell
     # Distroless (Debian Bullseye bzw. 11)
     Get-Content Dockerfile | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian
-    docker build --sbom true --tag juergenzimmermann/buch:2023.10.0-distroless .
+    docker build --sbom true --tag juergenzimmermann/film:2023.10.0-distroless .
 
     # Debian Bookworm (12) slim
     Get-Content Dockerfile.debian | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian
-    docker build --sbom true --tag juergenzimmermann/buch:2023.10.0-bookworm --file Dockerfile.bookworm .
+    docker build --sbom true --tag juergenzimmermann/film:2023.10.0-bookworm --file Dockerfile.bookworm .
 
     # Wolfi
     Get-Content Dockerfile.wolfi | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian
-    docker build --sbom true --tag juergenzimmermann/buch:2023.10.0-wolfi --file Dockerfile.wolfi .
+    docker build --sbom true --tag juergenzimmermann/film:2023.10.0-wolfi --file Dockerfile.wolfi .
 ```
 
 ### Image inspizieren
@@ -476,9 +476,9 @@ Mit dem Unterkommando `inspect` kann man die Metadaten, z.B. Labels, zu einem
 Image inspizieren:
 
 ```powershell
-    docker inspect juergenzimmermann/buch:2023.10.0-distroless
-    docker inspect juergenzimmermann/buch:2023.10.0-bookworm
-    docker inspect juergenzimmermann/buch:2023.10.0-wolfi
+    docker inspect juergenzimmermann/film:2023.10.0-distroless
+    docker inspect juergenzimmermann/film:2023.10.0-bookworm
+    docker inspect juergenzimmermann/film:2023.10.0-wolfi
 ```
 
 #### docker sbom
@@ -488,9 +488,9 @@ inspizieren, welche Bestandteilen in einem Docker-Images enthalten sind, z.B.
 npm-Packages oder Debian-Packages.
 
 ```powershell
-    docker sbom juergenzimmermann/buch:2023.10.0-distroless
-    docker sbom juergenzimmermann/buch:2023.10.0-bookworm
-    docker sbom juergenzimmermann/buch:2023.10.0-wolfi
+    docker sbom juergenzimmermann/film:2023.10.0-distroless
+    docker sbom juergenzimmermann/film:2023.10.0-bookworm
+    docker sbom juergenzimmermann/film:2023.10.0-wolfi
 ```
 
 #### dive
@@ -517,18 +517,18 @@ PowerShell herunterfahren.
 ```powershell
     cd .extras/compose
 
-    # PowerShell fuer buch-Server mit distroless-Image zzgl. DB-Server und Mailserver
+    # PowerShell fuer film-Server mit distroless-Image zzgl. DB-Server und Mailserver
     docker compose up
 
-    # alternativ: buch-Image mit Debian Bookworm
+    # alternativ: film-Image mit Debian Bookworm
     docker compose -f compose.yml -f compose.bookworm.yml up
 
-    # alternativ: buch-Image mit Wolfi
+    # alternativ: film-Image mit Wolfi
     docker compose -f compose.yml -f compose.wolfi.yml up
 
     # Nur zur Fehlersuche: weitere PowerShell für bash (NICHT bei distroless!)
     cd .extras\compose
-    docker compose exec buch bash
+    docker compose exec film bash
         id
         env
         exit
@@ -539,7 +539,7 @@ PowerShell herunterfahren.
         nslookup postgres
         exit
 
-    # 2. Powershell: buch-Server einschl. DB-Server und Mailserver herunterfahren
+    # 2. Powershell: film-Server einschl. DB-Server und Mailserver herunterfahren
     cd .extras/compose
     docker compose down
 ```
@@ -635,9 +635,9 @@ groben Überblick verschaffen, wieviele Sicherheitslücken in den Bibliotheken i
 Image enthalten sind:
 
 ```powershell
-    docker scout quickview juergenzimmermann/buch:2023.10.0-distroless
-    docker scout quickview juergenzimmermann/buch:2023.10.0-bookworm
-    docker scout quickview juergenzimmermann/buch:2023.10.0-wolfi
+    docker scout quickview juergenzimmermann/film:2023.10.0-distroless
+    docker scout quickview juergenzimmermann/film:2023.10.0-bookworm
+    docker scout quickview juergenzimmermann/film:2023.10.0-wolfi
 ```
 
 Dabei bedeutet:
@@ -654,8 +654,8 @@ Die Details zu den CVE-Records im Image kann man durch das Unterkommando `cves`
 von _Scout_ auflisten:
 
 ```powershell
-    docker scout cves juergenzimmermann/buch:2023.10.0-bookworm
-    docker scout cves --format only-packages juergenzimmermann/buch:2023.10.0-bookworm
+    docker scout cves juergenzimmermann/film:2023.10.0-bookworm
+    docker scout cves --format only-packages juergenzimmermann/film:2023.10.0-bookworm
 ````
 
 Statt der Kommandozeile kann man auch den Menüpunkt "Docker Scout" im
@@ -665,7 +665,7 @@ _Docker Dashboard_ verwenden.
 
 Von Aquasec gibt es _Trivy_, um Docker-Images auf Sicherheitslücken zu analysieren.
 Trivy gibt es auch als Docker-Image. In `compose.trivy.yml` ist ein
-Service für Trivy so konfiguriert, dass das Image `buch` analysiert wird.
+Service für Trivy so konfiguriert, dass das Image `film` analysiert wird.
 
 ```powershell
     cd .extras\compose\trivy
@@ -797,7 +797,7 @@ Tipps:
 In Anlehnung an die
 [Guidelines von TypeScript](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines)
 
-- "Feature Filenames", z.B. buch.service.ts
+- "Feature Filenames", z.B. film.service.ts
 - Klassennamen mit PascalCase
 - Union-Types (mit Strings) statt Enums
 - Attribute und Funktionen mit camelCase
