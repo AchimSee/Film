@@ -1,7 +1,7 @@
 # Hinweise zum Programmierbeispiel
 
 <!--
-  Copyright (C) 2020 - present Mazlum Solmaz, Hochschule Karlsruhe
+  Copyright (C) 2020 - present Mazlum Sol, Hochschule Karlsruhe
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
