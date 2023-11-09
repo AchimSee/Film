@@ -1,9 +1,9 @@
-id;vorname;nachname;buch_id
+id;vorname;nachname;film_id
 1;Alpha;Müller;1
 20;Beta;Morgen;20
 21;Karl;Marx;20
 30;Gamma;Morgenstern;30
-31;Johannes;von Ka;30
-40;Delta;univ;40
-50;Epsilon;aristoteles;50
-60;Phi;sokrates;60
+31;Johannes;Bibus;30
+40;Delta;Univ;40
+50;Epsilon;Aristoteles;50
+60;Phi;Sokrates;60

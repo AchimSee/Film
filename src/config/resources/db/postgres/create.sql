@@ -26,7 +26,7 @@ ALTER ROLE film SET search_path = 'film';
 
 -- https://www.postgresql.org/docs/current/sql-createtype.html
 -- https://www.postgresql.org/docs/current/datatype-enum.html
-CREATE TYPE filmart AS ENUM ('DRUCKAUSGABE', 'KINDLE');
+CREATE TYPE filmgenre AS ENUM ('ACTION', 'FANTASY', 'HORROR', 'SCIENCE-FICTION');
 
 -- https://www.postgresql.org/docs/current/sql-createtable.html
 -- https://www.postgresql.org/docs/current/datatype.html
@@ -41,11 +41,11 @@ CREATE TABLE IF NOT EXISTS film (
     version       integer NOT NULL DEFAULT 0,
                   -- impliziter Index als B-Baum durch UNIQUE
                   -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS
-    isbn          varchar(17) NOT NULL UNIQUE USING INDEX TABLESPACE filmspace,
+    isan          varchar(17) NOT NULL UNIQUE USING INDEX TABLESPACE filmspace,
                   -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS
                   -- https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP
     rating        integer NOT NULL CHECK (rating >= 0 AND rating <= 5),
-    art           filmart,
+    genre           filmgenre,
                   -- https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL
                   -- 10 Stellen, davon 2 Nachkommastellen
     preis         decimal(8,2) NOT NULL,
