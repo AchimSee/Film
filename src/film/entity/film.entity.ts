@@ -74,7 +74,7 @@ export class Film {
     id: number | undefined;
 
     @Column('varchar', { unique: true, length: 32 })
-    @ApiProperty({ example: '1881-66C7-3420-0000-7', type: String })
+    @ApiProperty({ example: '1881-66C7-3420-0000', type: String })
     readonly isan!: string;
 
     @VersionColumn()
@@ -84,8 +84,8 @@ export class Film {
     @ApiProperty({ example: 5, type: Number })
     readonly rating: number | undefined;
 
-    @Column('varchar', { length: 12 })
-    @ApiProperty({ example: 'DRUCKAUSGABE', type: String })
+    @Column('varchar', { length: 16 })
+    @ApiProperty({ example: 'FANTASY', type: String })
     readonly genre: FilmGenre | undefined;
 
     @Column('decimal', {
