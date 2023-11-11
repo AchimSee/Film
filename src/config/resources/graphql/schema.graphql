@@ -58,7 +58,7 @@ type Film {
   version: Int!
   isan: String!
   rating: Int
-  genre: Art
+  genre: Genre
   preis: Float!
   lieferbar: Boolean
   datum: String
@@ -71,9 +71,11 @@ type Film {
 }
 
 "Enum-Typ für die Art eines Films"
-enum Art {
-  DRUCKAUSGABE
-  KINDLE
+enum Genre {
+  FANTASY
+  HORROR
+  ACTION
+  SCIENCE-FICTION
 }
 
 "Daten zum Titel eines neuen Films"
@@ -92,7 +94,7 @@ input SchauspielerInput {
 input FilmInput {
   isan: String
   rating: Int
-  genre: Art
+  genre: Genre
   preis: Float
   rabatt: Float
   lieferbar: Boolean
@@ -113,7 +115,7 @@ input FilmUpdateInput {
   version: Int
   isan: String
   rating: Int
-  genre: Art
+  genre: Genre
   preis: Float
   rabatt: Float
   lieferbar: Boolean
