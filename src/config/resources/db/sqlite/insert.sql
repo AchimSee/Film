@@ -21,17 +21,17 @@
 -- "Software Pioneers"
 
 INSERT INTO film(id, version, isan, rating, genre, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (1,0,'978-3-897-22583-1',4,'SCIENCE-FICTION',11.1,0.011,true,'2022-02-01','https://acme.at','JAVASCRIPT','2022-02-01 00:00:00','2022-02-01 00:00:00');
+    (1,0,'1881-66C7-3420-0000',4,'SCIENCE-FICTION',11.1,0.011,true,'2022-02-01','https://acme.at','JAVASCRIPT','2022-02-01 00:00:00','2022-02-01 00:00:00');
 INSERT INTO film(id, version, isan, rating, genre, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (20,0,'978-3-827-31552-6',2,'ACTION',22.2,0.022,true,'2022-02-02','https://acme.biz','TYPESCRIPT','2022-02-02 00:00:00','2022-02-02 00:00:00');
+    (20,0,'1881-66C7-3420-0001',2,'ACTION',22.2,0.022,true,'2022-02-02','https://acme.biz','TYPESCRIPT','2022-02-02 00:00:00','2022-02-02 00:00:00');
 INSERT INTO film(id, version, isan, rating, genre, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (30,0,'978-0-201-63361-0',3,'ACTION',33.3,0.033,true,'2022-02-03','https://acme.com','JAVASCRIPT,TYPESCRIPT','2022-02-03 00:00:00','2022-02-03 00:00:00');
+    (30,0,'1881-66C7-3420-0002',3,'ACTION',33.3,0.033,true,'2022-02-03','https://acme.com','JAVASCRIPT,TYPESCRIPT','2022-02-03 00:00:00','2022-02-03 00:00:00');
 INSERT INTO film(id, version, isan, rating, genre, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (40,0,'978-0-007-09732-6',4,'HORROR',44.4,0.044,true,'2022-02-04','https://acme.de',null,'2022-02-04 00:00:00','2022-02-04 00:00:00');
+    (40,0,'1881-66C7-3420-0003',4,'HORROR',44.4,0.044,true,'2022-02-04','https://acme.de',null,'2022-02-04 00:00:00','2022-02-04 00:00:00');
 INSERT INTO film(id, version, isan, rating, genre, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (50,0,'978-3-824-40481-0',2,'ACTION',55.5,0.055,true,'2022-02-05','https://acme.es','TYPESCRIPT','2022-02-05 00:00:00','2022-02-05 00:00:00');
+    (50,0,'1881-66C7-3420-0004',2,'ACTION',55.5,0.055,true,'2022-02-05','https://acme.es','TYPESCRIPT','2022-02-05 00:00:00','2022-02-05 00:00:00');
 INSERT INTO film(id, version, isan, rating, genre, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (60,0,'978-3-540-43081-0',1,'FANTASY',66.6,0.066,true,'2022-02-06','https://acme.fi','TYPESCRIPT','2022-02-06 00:00:00','2022-02-06 00:00:00');
+    (60,0,'1881-66C7-3420-0005',1,'FANTASY',66.6,0.066,true,'2022-02-06','https://acme.fi','TYPESCRIPT','2022-02-06 00:00:00','2022-02-06 00:00:00');
 
 INSERT INTO titel(id, titel, untertitel, film_id) VALUES
     (1,'Alpha','alpha',1);
