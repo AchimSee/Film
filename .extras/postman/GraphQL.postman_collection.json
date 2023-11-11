@@ -1,0 +1,861 @@
+{
+	"info": {
+		"name": "GraphQL",
+		"description": "GraphQL-Schnittstelle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Query",
+			"item": [
+				{
+					"name": "Suche isan, version, genre und titel vom Film mit ID 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { film } = body.data;\r",
+									"    const { isan, version, genre, rabatt, titel } = film;\r",
+									"    pm.expect(isan).to.be.a('string');\r",
+									"    pm.expect(version).to.be.a('number').that.is.gte(0);\r",
+									"    pm.expect(genre).to.be.a('string');\r",
+									"    pm.expect(rabatt).to.match(/ %$/u);\r",
+									"    pm.expect(titel.titel).to.be.a('string');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($id: ID! = \"1\") {\r\n  film(id: $id) {\r\n    isan\r\n    version\r\n    genre\r\n    rabatt(short: true)\r\n    titel {\r\n      titel\r\n    }\r\n  }\r\n}",
+								"variables": "{\r\n  \"id\": \"1\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suche isan von einem Film mit nicht-vorhandener 999999",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit errors', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.include('999999');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('film');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($id: ID! = \"1\") {\r\n  film(id: $id) {\r\n    isan\r\n  }\r\n}",
+								"variables": "{\r\n  \"id\": \"999999\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suche id, version und titel von allen Filmen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { filme } = body.data;\r",
+									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
+									"    filme.forEach(film => {\r",
+									"        const { id, version, genre, titel } = film;\r",
+									"        pm.expect(id).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(version).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(genre).to.be.a('string');\r",
+									"        pm.expect(titel.titel).to.be.a('string');\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\r\n  filme {\r\n    id\r\n    version\r\n    genre\r\n    titel {\r\n      titel\r\n    }\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suche genre von Filmen mit Titel Alpha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit genre', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { filme } = body.data;\r",
+									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
+									"    filme.map(film => film.genre)\r",
+									"        .forEach(genre => pm.expect(genre).to.be.a('string'));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($titel: String = \"Alpha\") {\r\n  filme(titel: $titel) {\r\n    genre\r\n  }\r\n}",
+								"variables": "{\r\n  \"titel\": \"Alpha\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suche genre, schlagwoerter, titel von Filmen mit Teilstring \"ta\" im Titel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit genre, schlagwoerter, titel', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { filme } = body.data;\r",
+									"    pm.expect(filme).to.be.an('array').that.is.not.empty;\r",
+									"    filme.forEach(film => {\r",
+									"        const { genre, schlagwoerter, titel } = film;\r",
+									"        pm.expect(genre).to.be.a('string');\r",
+									"        pm.expect(schlagwoerter).to.be.an('array').that.is.not.empty;\r",
+									"        pm.expect(titel.titel).to.be.a('string').that.includes('ta');\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($titel: String = \"a\") {\r\n  filme(titel: $titel) {\r\n    genre\r\n    schlagwoerter\r\n    titel {\r\n      titel\r\n    }\r\n  }\r\n}",
+								"variables": "{\r\n  \"titel\": \"ta\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suche genre von Filmen mit nicht-vorhandenem Titel Nichtvorhanden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit errors', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string').that.includes('Nichtvorhanden');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('filme');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($titel: String = \"Nichtvorhanden\") {\r\n  filme(titel: $titel) {\r\n    genre\r\n  }\r\n}",
+								"variables": "{\r\n  \"titel\": \"Nichtvorhanden\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Queries mit der GraphQL-Schnittstelle"
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login als admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit Token', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { token } = body.data.login;\r",
+									"    pm.expect(token).to.be.a('string').that.matches(/.+\\..+\\..+/u);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n    login(username: \"admin\", password: \"p\") {\r\n        token\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login mit falschem Passwort",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit Fehlermeldung', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const error = errors[0];\r",
+									"    const { message, path, extensions } = error;\r",
+									"    pm.expect(message).to.be.a('string').that.includes('Passwort');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('login');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n    login(username: \"admin\", password: \"FALSCH\") {\r\n        token\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Login mit der GraphQL-Schnittstelle"
+		},
+		{
+			"name": "Mutation",
+			"item": [
+				{
+					"name": "Neuer Film",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { data } = body;\r",
+									"    pm.expect(data.create.id).to.be.a('number').that.is.gte(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n      isan: \"1881-66C7-1234-0000\",\r\n      rating: 1,\r\n      genre: FANTASY,\r\n      preis: 99.99,\r\n      rabatt: 0.123,\r\n      lieferbar: true,\r\n      datum: \"2022-01-31\",\r\n      homepage: \"https://create.mutation\",\r\n      schlagwoerter: [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n      titel: {\r\n        titel: \"Titelcreatemutation\",\r\n        untertitel: \"untertitelcreatemutation\"\r\n      },\r\n      mehrereschauspieler: [{\r\n        vorname: \"Thomas\",\r\n        nachname: \"Kühn\"\r\n      }]\r\n    }\r\n  ) {\r\n      id\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Neuer Film mit ungültigen Daten",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string');\r",
+									"    const props = ['titel.titel', 'isan', 'rating', 'preis', 'datum', 'homepage'];\r",
+									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('create');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n      isan: \"falsche-isan\",\r\n      rating: 999,\r\n      genre: FANTASY,\r\n      preis: -1,\r\n      rabatt: 0,\r\n      lieferbar: true,\r\n      datum: \"12345-123-123\",\r\n      homepage: \"anyHomepage\",\r\n      schlagwoerter: [\"JAVASCRIPT\"],\r\n      titel: {\r\n        titel: \"?!\"\r\n        untertitel: \"mutationinvalid\"\r\n      }\r\n    }\r\n  ) {\r\n      id\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Film mit ID 40 aktualisieren",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit aktualisierter Versionsnummer', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { data } = body;\r",
+									"    pm.expect(data.update.version).to.be.a('number').that.is.gte(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"40\",\r\n      version: 0,\r\n      isan: \"1881-66C7-3420-0003\",\r\n      rating: 5,\r\n      genre: ACTION,\r\n      preis: 444.44,\r\n      rabatt: 0.099,\r\n      lieferbar: false,\r\n      datum: \"2022-04-04\",\r\n      homepage: \"https://update.mutation\",\r\n      schlagwoerter: [\"JAVASCRIPT\", \"TYPESCRIPT\"]\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Film mit ID 40 mit ungültigen Daten aktualisieren",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string');\r",
+									"    const props = ['isan', 'preis', 'datum', 'homepage'];\r",
+									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('update');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: 40,\r\n      version: 0,\r\n      isan: \"falsche-ISAN\",\r\n      rating: -1,\r\n      genre: ACTION,\r\n      preis: -1,\r\n      rabatt: 2,\r\n      lieferbar: false,\r\n      datum: \"12345-123-123\",\r\n      homepage: \"anyHomepage\"\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nicht-Vorhandenen Film aktualisieren",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string').that.includes('999999');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('update');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"999999\",\r\n      version: 0,\r\n      isan: \"1881-66C7-3420-0006\",\r\n      rating: 5,\r\n      genre: ,\r\n      preis: 99.99,\r\n      rabatt: 0.099,\r\n      lieferbar: false,\r\n      datum: \"2022-02-01\",\r\n      schlagwoerter: [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n      homepage: \"https://nicht.vorhanden.de/\"\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Film mit ID 60 löschen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { data } = body;\r",
+									"    pm.expect(data.delete).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  delete(id: \"60\")\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Neuanlegen, Ändern und Löschen mit der GraphQL-Schnittstelle",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest({",
+							"    url: 'https://localhost:3000/graphql',",
+							"    method: 'POST',",
+							"    header: {",
+							"        'Content-Type': 'application/json',",
+							"    },",
+							"    body: JSON.stringify({",
+							"        query: `",
+							"            mutation {",
+							"                login(username: \"admin\", password: \"p\") {",
+							"                    token",
+							"                }",
+							"            }",
+							"        `",
+							"    })",
+							"}, (err, res) => {",
+							"    pm.collectionVariables.set('TOKEN', res.json().data.login.token);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "graphql_url",
+			"value": "{{base_url}}/graphql",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
