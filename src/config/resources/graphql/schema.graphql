@@ -75,7 +75,7 @@ enum Genre {
   FANTASY
   HORROR
   ACTION
-  SCIENCE-FICTION
+  SCIENCEFICTION
 }
 
 "Daten zum Titel eines neuen Films"

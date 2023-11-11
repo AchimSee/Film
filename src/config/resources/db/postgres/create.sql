@@ -26,7 +26,7 @@ ALTER ROLE film SET search_path = 'film';
 
 -- https://www.postgresql.org/docs/current/sql-createtype.html
 -- https://www.postgresql.org/docs/current/datatype-enum.html
-CREATE TYPE filmgenre AS ENUM ('ACTION', 'FANTASY', 'HORROR', 'SCIENCE-FICTION');
+CREATE TYPE filmgenre AS ENUM ('ACTION', 'FANTASY', 'HORROR', 'SCIENCEFICTION');
 
 -- https://www.postgresql.org/docs/current/sql-createtable.html
 -- https://www.postgresql.org/docs/current/datatype.html

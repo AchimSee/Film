@@ -21,7 +21,7 @@
 -- "Software Pioneers"
 
 INSERT INTO film(id, version, isan, rating, genre, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (1,0,'1881-66C7-3420-0000',4,'SCIENCE-FICTION',11.1,0.011,true,'2022-02-01','https://acme.at','JAVASCRIPT','2022-02-01 00:00:00','2022-02-01 00:00:00');
+    (1,0,'1881-66C7-3420-0000',4,'SCIENCEFICTION',11.1,0.011,true,'2022-02-01','https://acme.at','JAVASCRIPT','2022-02-01 00:00:00','2022-02-01 00:00:00');
 INSERT INTO film(id, version, isan, rating, genre, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
     (20,0,'1881-66C7-3420-0001',2,'ACTION',22.2,0.022,true,'2022-02-02','https://acme.biz','TYPESCRIPT','2022-02-02 00:00:00','2022-02-02 00:00:00');
 INSERT INTO film(id, version, isan, rating, genre, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
