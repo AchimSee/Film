@@ -1,7 +1,7 @@
 # Zusammenfassung
 
 <!--
-  Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
+  Copyright (C) 2020 - present Mazlum Solmaz, Hochschule Karlsruhe
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-[Juergen Zimmermann](mailto:Juergen.Zimmermann@HS-Karlsruhe.de)
+[Mazlum Solmaz](mailto:Mazlum.Solmaz@HS-Karlsruhe.de)
 
 GPL v3
 
