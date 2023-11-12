@@ -203,7 +203,7 @@ describe('GraphQL Mutations', () => {
                             rabatt: 0.011,
                             lieferbar: true,
                             datum: "2021-01-31",
-                            homepage: "http://acme.com",
+                            homepage: "https://acme.com",
                             schlagwoerter: ["JAVASCRIPT"]
                             titel: {
                                 titel: "Titelcreatemutation",
