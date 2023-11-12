@@ -33,7 +33,7 @@ import { loginRest } from '../login.js';
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const geaenderterFilm: FilmDtoOhneRef = {
-    isan: '978-0-201-63361-0',
+    isan: '1881-66C7-3420-0002',
     rating: 5,
     genre: 'ACTION',
     preis: 3333,
@@ -46,7 +46,7 @@ const geaenderterFilm: FilmDtoOhneRef = {
 const idVorhanden = '30';
 
 const geaenderterFilmIdNichtVorhanden: FilmDtoOhneRef = {
-    isan: '978-0-007-09732-6',
+    isan: '1881-66C7-3420-0003',
     rating: 4,
     genre: 'ACTION',
     preis: 44.4,
@@ -61,7 +61,7 @@ const idNichtVorhanden = '999999';
 const geaenderterFilmInvalid: Record<string, unknown> = {
     isan: 'falsche-ISAN',
     rating: -1,
-    genre: 'ACTION',
+    genre: 'UNSICHTBAR',
     preis: -1,
     rabatt: 2,
     lieferbar: true,
@@ -71,7 +71,7 @@ const geaenderterFilmInvalid: Record<string, unknown> = {
 };
 
 const veralterFilm: FilmDtoOhneRef = {
-    isan: '978-0-007-09732-6',
+    isan: '1881-66C7-3420-0003',
     rating: 1,
     genre: 'ACTION',
     preis: 44.4,

@@ -2496,7 +2496,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isan\": \"978-0-201-63361-0\",\r\n  \"rating\": 5,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"isan\": \"1881-66C7-3420-0002\",\r\n  \"rating\": 5,\r\n  \"genre\": \"ACTION\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://geaendert.put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
