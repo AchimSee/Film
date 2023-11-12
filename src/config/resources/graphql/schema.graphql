@@ -51,7 +51,7 @@ type Schauspieler {
   nachname: String
 }
 
-"Datenschema zu einem Film, das gelesen wird"
+"Datenschema zu einem Film, welcher gelesen wird"
 type Film {
   # ID ist bei Apollo ein String
   id: Int!
@@ -109,7 +109,7 @@ type CreatePayload {
   id: Int
 }
 
-"Daten für ein zu änderndes Film"
+"Daten für ein zu ändernden Film"
 input FilmUpdateInput {
   id: ID
   version: Int

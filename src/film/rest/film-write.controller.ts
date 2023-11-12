@@ -183,7 +183,7 @@ export class FilmWriteController {
     @HttpCode(HttpStatus.NO_CONTENT)
     @ApiOperation({ summary: 'Film mit der ID löschen' })
     @ApiNoContentResponse({
-        description: 'Der FIlm wurde gelöscht oder war nicht vorhanden',
+        description: 'Der Film wurde gelöscht oder war nicht vorhanden',
     })
     @ApiForbiddenResponse({ description: MSG_FORBIDDEN })
     async delete(@Param('id') id: number) {
