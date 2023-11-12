@@ -48,7 +48,7 @@ describe('GET /rest', () => {
 
     beforeAll(async () => {
         await startServer();
-        baseURL = `https://${host}:${port}/rest//1`;
+        baseURL = `https://${host}:${port}/rest`;
         client = axios.create({
             baseURL,
             httpsAgent,
@@ -78,8 +78,8 @@ describe('GET /rest', () => {
         filme
             .map((film) => film._links.self.href)
             .forEach((selfLink) => {
-                //expect(selfLink).toMatch(new RegExp(`^${baseURL}`, 'u'));
-                expect(selfLink).toMatch(baseURL);
+                // eslint-disable-next-line security/detect-non-literal-regexp, security-node/non-literal-reg-expr
+                expect(selfLink).toMatch(new RegExp(`^${baseURL}`, 'u'));
             });
     });
 
