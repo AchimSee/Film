@@ -28,7 +28,7 @@ import { Type } from 'class-transformer';
     // eslint-disable-next-line security/detect-unsafe-regex
     /^(?:[\da-f]{4}-){4}[\da-z](?:-(?:[\da-f]{4}-){2}[\da-z])?$/u;
 */
-export const ISAN_REGEX = /^[^S]*$/u;
+export const ISAN_REGEX = /^(?:(?!S).)*$/u;
 
 export const MAX_RATING = 5;
 

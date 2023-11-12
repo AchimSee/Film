@@ -128,7 +128,7 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isan: "falsche-ISAN",
+                            isan: "S",
                             rating: -1,
                             genre: DRAMA,
                             preis: -1,
