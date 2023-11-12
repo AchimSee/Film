@@ -59,7 +59,7 @@ const geaenderterFilmIdNichtVorhanden: FilmDtoOhneRef = {
 const idNichtVorhanden = '999999';
 
 const geaenderterFilmInvalid: Record<string, unknown> = {
-    isan: 'falsche-ISAN',
+    isan: 'S',
     rating: -1,
     genre: 'UNSICHTBAR',
     preis: -1,
