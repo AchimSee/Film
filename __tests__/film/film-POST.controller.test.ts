@@ -34,7 +34,7 @@ import { loginRest } from '../login.js';
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const neuerFilm: FilmDTO = {
-    isan: '978-0-007-00644-1',
+    isan: '1111-2222-3333-4444',
     rating: 1,
     genre: 'ACTION',
     preis: 99.99,
@@ -69,7 +69,7 @@ const neuerFilmInvalid: Record<string, unknown> = {
     },
 };
 const neuerFilmIsanExistiert: FilmDTO = {
-    isan: '978-3-897-22583-1',
+    isan: '1881-66C7-3420-0005',
     rating: 1,
     genre: 'HORROR',
     preis: 99.99,
