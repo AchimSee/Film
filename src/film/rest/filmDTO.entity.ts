@@ -8,7 +8,6 @@ import {
     ArrayUnique,
     IsArray,
     IsBoolean,
-    IsISBN,
     IsISO8601,
     IsInt,
     IsOptional,
@@ -25,13 +24,19 @@ import { SchauspielerDTO } from './schauspielerDTO.entity.js';
 import { TitelDTO } from './titelDTO.entity.js';
 import { Type } from 'class-transformer';
 
+/**export const ISAN_REGEX =
+    // eslint-disable-next-line security/detect-unsafe-regex
+    /^(?:[\da-f]{4}-){4}[\da-z](?:-(?:[\da-f]{4}-){2}[\da-z])?$/u;
+*/
+export const ISAN_REGEX = /^(?:(?!S).)*$/u;
+
 export const MAX_RATING = 5;
 
 /**
  * Entity-Klasse für Filme ohne TypeORM und ohne Referenzen.
  */
 export class FilmDtoOhneRef {
-    @IsISBN()
+    @Matches(ISAN_REGEX)
     @ApiProperty({ example: '978-0-007-00644-1', type: String })
     readonly isan!: string;
 
