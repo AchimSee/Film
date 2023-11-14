@@ -20,14 +20,14 @@ schema {
   mutation: Mutation
 }
 
-"Funktionen, um Bücherdaten zu lesen"
+"Funktionen, um Filmdaten zu lesen"
 type Query {
   filme(titel: String): [Film!]
 
   film(id: ID!): Film
 }
 
-"Funktionen, um Bücher neu anzulegen, zu aktualisieren oder zu löschen"
+"Funktionen, um Filme neu anzulegen, zu aktualisieren oder zu löschen"
 type Mutation {
   create(input: FilmInput!): CreatePayload
 
@@ -45,10 +45,10 @@ type Titel {
   untertitel: String
 }
 
-"Daten zum Titel eines Films"
+"Daten zu einem Schauspieler"
 type Schauspieler {
   vorname: String!
-  nachname: String
+  nachname: String!
 }
 
 "Datenschema zu einem Film, welcher gelesen wird"
@@ -84,13 +84,13 @@ input TitelInput {
   untertitel: String
 }
 
-"Daten zu den schauspielern eines Films"
+"Daten zu den Schauspielern eines Films"
 input SchauspielerInput {
   vorname: String!
   nachname: String!
 }
 
-"Daten für ein neues Film"
+"Daten für einen neuen Film"
 input FilmInput {
   isan: String
   rating: Int
