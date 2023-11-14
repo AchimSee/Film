@@ -71,7 +71,7 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isan: "1111-2222-3333-5555",
+                            isan: "978-0-321-19368-1",
                             rating: 1,
                             genre: HORROR,
                             preis: 99.99,
@@ -128,7 +128,7 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isan: "S",
+                            isan: "Falsche-Isbn",
                             rating: -1,
                             genre: DRAMA,
                             preis: -1,
@@ -196,7 +196,7 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            isan: "2222-3333-4444-5555",
+                            isan: "978-3-663-08746-5",
                             rating: 1,
                             genre: ACTION,
                             preis: 11.1,
@@ -254,7 +254,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "40",
                             version: 0,
-                            isan: "1881-66C7-3420-0003",
+                            isan: "978-0-007-09732-6",
                             rating: 5,
                             genre: ACTION,
                             preis: 444.44,
@@ -371,7 +371,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
-                            isan: "9898-4321-5454-8976",
+                            isan: "978-0-007-09732-6",
                             rating: 5,
                             genre: Fantasy,
                             preis: 99.99,
