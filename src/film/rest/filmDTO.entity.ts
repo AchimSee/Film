@@ -37,7 +37,7 @@ export const MAX_RATING = 5;
  */
 export class FilmDtoOhneRef {
     @Matches(ISAN_REGEX)
-    @ApiProperty({ example: '978-0-007-00644-1', type: String })
+    @ApiProperty({ example: '1881-66C7-3420-0000', type: String })
     readonly isan!: string;
 
     @IsInt()
