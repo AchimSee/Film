@@ -118,8 +118,7 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-
-    /*
+    // eslint-disable-next-line max-lines-per-function
     test('Film mit ungueltigen Werten neu anlegen', async () => {
         // given
         const token = await loginGraphQL(client);
@@ -186,7 +185,7 @@ describe('GraphQL Mutations', () => {
         expect(messages).toHaveLength(expectedMsg.length);
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
-*/
+
     // -------------------------------------------------------------------------
     test('Neuen Film nur als "admin"/"fachabteilung"', async () => {
         // given
