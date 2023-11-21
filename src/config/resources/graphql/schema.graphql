@@ -48,7 +48,7 @@ type Titel {
 "Daten zum Titel eines Films"
 type Schauspieler {
   vorname: String!
-  nachname: String
+  nachname: String!
 }
 
 "Datenschema zu einem Film, welcher gelesen wird"
