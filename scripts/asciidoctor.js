@@ -33,12 +33,12 @@ kroki.register(adoc.Extensions);
 const options = {
     safe: 'safe',
     attributes: { linkcss: true },
-    base_dir: '.extras/doc/projekthandfilm',
+    base_dir: '.extras/doc/projekthandbuch',
     to_dir: 'html',
     mkdirs: true,
 };
 adoc.convertFile(
-    join('.extras', 'doc', 'projekthandfilm', 'projekthandfilm.adoc'),
+    join('.extras', 'doc', 'projekthandbuch', 'projekthandbuch.adoc'),
     options,
 );
 
@@ -49,9 +49,9 @@ console.log(
         '..',
         '.extras',
         'doc',
-        'projekthandfilm',
+        'projekthandbuch',
         'html',
-        'projekthandfilm.html',
+        'projekthandbuch.html',
     )}`,
 );
 
