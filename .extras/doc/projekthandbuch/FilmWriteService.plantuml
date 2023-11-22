@@ -1,0 +1,88 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+' Preview durch <Alt>d
+
+@startuml Anwendungskern
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "@Injectable" as Injectable
+  hide Injectable circle
+}
+
+package typeorm {
+  class Repository<T>
+}
+
+package @nestjs/typeorm {
+  class "@InjectRepository" as InjectRepository
+  hide InjectRepository circle
+}
+
+package mail {
+  class MailService
+}
+
+package film {
+  package entity {
+    class Film
+  }
+
+  package service #DDDDDD {
+    class FilmInvalid
+    class TitelExists
+    class IsanExists
+    class VersionInvalid
+    class VersionOutdated
+
+    class FilmWriteService << control >> <<@Injectable()>> {
+      + async create(film: Film): Promise<string|FilmInvalid|TitelExists|IsanExists>
+      + async update(id: number, film: Film, version: string): Promise<number|FilmInvalid|TitelExists|IsanExists|VersionInvalid|VersionOutdated>
+      + async delete(id: number): Promise<boolean>
+    }
+
+    FilmWriteService o--> "1" FilmValidationService: validationService
+    FilmWriteService o--> "1" FilmReadService: readService
+    FilmWriteService o--> "1" Repository: @InjectRepository repo
+    FilmWriteService o--> "1" MailService: mailService
+
+    FilmWriteService .up.> Injectable
+    FilmWriteService .up.> InjectRepository
+
+    FilmWriteService .up.> Promise
+    FilmWriteService ..> Film
+    FilmWriteService .up.> FilmInvalid
+    FilmWriteService .up.> TitelExists
+    FilmWriteService .up.> IsanExists
+    FilmWriteService .up.> VersionInvalid
+    FilmWriteService .up.> VersionOutdated
+
+    FilmInvalid .up[hidden].> Film
+    Film .up[hidden].> Promise
+    Film .up[hidden].> Injectable
+    Film .up[hidden].> InjectRepository
+    TitelExists .up[hidden].> Film
+    FilmValidationService .[hidden].> Repository
+    FilmValidationService .[hidden].> MailService
+  }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml

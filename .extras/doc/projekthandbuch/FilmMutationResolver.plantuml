@@ -1,0 +1,91 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+' Preview durch <Alt>d
+
+@startuml Controller-Klasse
+
+interface Promise<T>
+
+package @nestjs/graphql {
+  class "@Resolver" as Resolver
+  hide Resolver circle
+
+  class "@UseGuards" as UseGuards
+  hide UseGuards circle
+
+  class "@UseInterceptors" as UseInterceptors
+  hide UseInterceptors circle
+
+  class "@Mutation" as Mutation
+  hide Mutation circle
+
+  class "@Args" as Args
+  hide Args circle
+}
+
+package security.auth {
+  class "type Role = 'ADMIN' | 'MITARBEITER' | 'KUNDE'" as Role
+  hide Role circle
+
+  class "@Roles" as Roles
+  hide Roles circle
+
+  Roles .right.> Role
+}
+
+package film #DDDDDD {
+  package entity #FFFFFF {
+    class Film <<entity>>
+  }
+
+  package service #FFFFFF {
+    class FilmWriteService << control >>
+  }
+
+  class "type FilmDTO = Omit<Film, 'mehrereschauspieler' | 'aktualisiert' | 'erzeugt'" as FilmDTO
+  hide FilmDTO circle
+
+    interface IdInput {
+        id: number
+    }
+
+  class FilmMutationResolver << control >> << @Resolver() >> << @UseGuards() >> << @UseInterceptors() >> {
+    + @Mutation() @Roles() async create(@Args() filmDTO: FilmDTO): Promise<number>
+    + @Mutation() @Roles() async update(@Args() filmDTO: FilmDTO): Promise<number>
+    + @Mutation() @Roles() async delete(@Args() id: IdInput): Promise<boolean>
+  }
+
+  FilmMutationResolver o-down-> "1" FilmWriteService : service
+
+  FilmMutationResolver ..> Film
+  FilmMutationResolver ..> FilmDTO
+  FilmMutationResolver ..> IdInput
+  FilmDTO .up.> Film
+  FilmMutationResolver ..> Promise
+  FilmMutationResolver ..> Resolver
+
+  FilmMutationResolver .up.> Roles
+  FilmMutationResolver .up.> Role
+
+  FilmDTO .[hidden].> Promise
+  FilmDTO .[hidden].> Resolver
+}
+
+hide empty members
+
+footer (c) Juergen Zimmermann
+
+@enduml
