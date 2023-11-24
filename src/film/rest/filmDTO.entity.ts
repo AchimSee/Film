@@ -46,7 +46,7 @@ export class FilmDtoOhneRef {
     @ApiProperty({ example: 5, type: Number })
     readonly rating: number | undefined;
 
-    @Matches(/^FANTASY$|^HORROR$|^ACTION$|^SCIENCEFICTION$/u)
+    @Matches(/^FANTASY$|^HORROR$|^ACTION$|^SCIENCEFICTION$|^DRAMA$/u)
     @IsOptional()
     @ApiProperty({ example: 'FANTASY', type: String })
     readonly genre: FilmGenre | undefined;

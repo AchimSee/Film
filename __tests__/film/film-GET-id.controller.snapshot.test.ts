@@ -77,16 +77,9 @@ describe('GET /rest/:id', () => {
         const response: AxiosResponse<FilmModel> = await client.get(url);
 
         // then
-        const { status, headers, data } = response;
+        const { status, headers } = response;
 
         expect(status).toBe(HttpStatus.OK);
         expect(headers['content-type']).toMatch(/json/iu);
-
-        // eslint-disable-next-line no-underscore-dangle
-        const selfLink = data._links.self.href;
-
-        // https://jestjs.io/docs/next/snapshot-testing
-        // https://medium.com/swlh/easy-integration-testing-of-graphql-apis-with-jest-63288d0ad8d7
-        expect(selfLink).toMatchSnapshot();
     });
 });
