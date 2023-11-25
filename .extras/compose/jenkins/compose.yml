@@ -70,7 +70,7 @@ services:
     networks: [jenkins-network]
     volumes:
       - type: bind
-        # /var/jenkins_home/workspace enthaelt das Verzeichnis "buch"
+        # /var/jenkins_home/workspace enthaelt das Verzeichnis "film"
         source: C:/Zimmermann/volumes/jenkins/data
         target: /var/jenkins_home
       - type: bind
