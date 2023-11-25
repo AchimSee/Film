@@ -24,11 +24,8 @@ import { SchauspielerDTO } from './schauspielerDTO.entity.js';
 import { TitelDTO } from './titelDTO.entity.js';
 import { Type } from 'class-transformer';
 
-export const ISAN_REGEX =
-    // eslint-disable-next-line security/detect-unsafe-regex
-    /^(?:[\da-f]{4}-){4}[\da-z](?:-(?:[\da-f]{4}-){2}[\da-z])?$/u;
-
-// export const ISAN_REGEX = /^(?:(?!S).)*$/u;
+// eslint-disable-next-line security/detect-unsafe-regex
+export const ISAN_REGEX = /^(?:[\da-f]{4}-){3}[\da-f]{4}$/iu;
 
 export const MAX_RATING = 5;
 
