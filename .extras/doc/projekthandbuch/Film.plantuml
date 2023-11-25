@@ -68,7 +68,7 @@ package film.entity {
     @Column() readonly nachname: string
   }
 
-  Film *--> "1" Titel : @OneToOne() \ntitelc
+  Film *--> "1" Titel : @OneToOne() \ntitel
   Film *--> "*" Schauspieler : @OneToMany() \nmehrereschauspieler
 
   Film .right.> Entity
