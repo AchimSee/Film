@@ -40,7 +40,7 @@ package film.entity {
   class "type FilmGenre = 'FANTASY' | 'HORROR' | 'ACTION' | 'SCIENCEFICTION'" as FilmGenre
   hide FilmGenre circle
 
-  class Buch <<entity>> <<@Entity>> {
+  class Film <<entity>> <<@Entity>> {
     @Column() @PrimaryColumn() readonly id: number
     @Column() readonly version: number
     @Column() readonly isan: string
