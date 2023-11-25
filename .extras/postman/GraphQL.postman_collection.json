@@ -711,7 +711,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"999999\",\r\n      version: 0,\r\n      isan: \"1881-66C7-3420-0009\",\r\n      rating: 5,\r\n      genre: ,\r\n      preis: 99.99,\r\n      rabatt: 0.099,\r\n      lieferbar: false,\r\n      datum: \"2022-02-01\",\r\n      schlagwoerter: [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n      homepage: \"https://nicht.vorhanden.de/\"\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"999999\",\r\n      version: 0,\r\n      isan: \"1881-66C7-3420-0009\",\r\n      rating: 5,\r\n      genre: ACTION,\r\n      preis: 99.99,\r\n      rabatt: 0.099,\r\n      lieferbar: false,\r\n      datum: \"2022-02-01\",\r\n      schlagwoerter: [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n      homepage: \"https://nicht.vorhanden.de/\"\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},

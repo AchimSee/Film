@@ -698,7 +698,7 @@
 									"    const { filme } = body._embedded;\r",
 									"    pm.expect(filme).to.be.an('array').that.has.a.lengthOf(1);\r",
 									"    const { isan, _links } = filme[0];\r",
-									"    pm.expect(isan).to.be.a('string').that.includes('978-3-897-22583-1');\r",
+									"    pm.expect(isan).to.be.a('string').that.includes('1881-66C7-3420-0000');\r",
 									"    pm.expect(_links.self.href).to.be.a('string').that.matches(/\\/rest\\/[1-9]\\d*$/u);\r",
 									"});"
 								],
