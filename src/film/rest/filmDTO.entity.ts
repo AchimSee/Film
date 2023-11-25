@@ -24,11 +24,11 @@ import { SchauspielerDTO } from './schauspielerDTO.entity.js';
 import { TitelDTO } from './titelDTO.entity.js';
 import { Type } from 'class-transformer';
 
-/**export const ISAN_REGEX =
+export const ISAN_REGEX =
     // eslint-disable-next-line security/detect-unsafe-regex
     /^(?:[\da-f]{4}-){4}[\da-z](?:-(?:[\da-f]{4}-){2}[\da-z])?$/u;
-*/
-export const ISAN_REGEX = /^(?:(?!S).)*$/u;
+
+// export const ISAN_REGEX = /^(?:(?!S).)*$/u;
 
 export const MAX_RATING = 5;
 
@@ -46,7 +46,7 @@ export class FilmDtoOhneRef {
     @ApiProperty({ example: 5, type: Number })
     readonly rating: number | undefined;
 
-    @Matches(/^FANTASY$|^HORROR$|^ACTION$|^SCIENCEFICTION$|^DRAMA$/u)
+    @Matches(/^FANTASY$|^HORROR$|^ACTION$|^SCIENCEFICTION$/u)
     @IsOptional()
     @ApiProperty({ example: 'FANTASY', type: String })
     readonly genre: FilmGenre | undefined;
