@@ -811,14 +811,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{rest_url}}?isan=978-3-897-22583-1",
+							"raw": "{{rest_url}}?isan=1881-66C7-3420-0000",
 							"host": [
 								"{{rest_url}}"
 							],
 							"query": [
 								{
 									"key": "isan",
-									"value": "978-3-897-22583-1"
+									"value": "1881-66C7-3420-0000"
 								}
 							]
 						}
@@ -2237,7 +2237,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isan\": \"978-3-897-22583-1\",\r\n  \"rating\": 1,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 99.9,\r\n  \"rabatt\": 0.1,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.isan\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"titel\": {\r\n    \"titel\": \"Titelpostisan\",\r\n    \"untertitel\": \"Untertitelpostisan\"\r\n  }\r\n}",
+							"raw": "{\r\n  \"isan\": \"1881-66C7-3420-0000\",\r\n  \"rating\": 1,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 99.9,\r\n  \"rabatt\": 0.1,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.isan\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"titel\": {\r\n    \"titel\": \"Titelpostisan\",\r\n    \"untertitel\": \"Untertitelpostisan\"\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2356,7 +2356,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isan\": \"978-0-007-00644-1\",\r\n  \"rating\": 1,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 99.99,\r\n  \"rabatt\": 0.123,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n    \"untertitel\": \"untertitelpost\"\r\n  },\r\n  \"mehrereschauspieler\": [{\r\n    \"vorname\": \"Thomas\",\r\n    \"nachname\": \"Kühn\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"isan\": \"1881-66C7-3420-0006\",\r\n  \"rating\": 1,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 99.99,\r\n  \"rabatt\": 0.123,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n    \"untertitel\": \"untertitelpost\"\r\n  },\r\n  \"mehrereschauspieler\": [{\r\n    \"vorname\": \"Thomas\",\r\n    \"nachname\": \"Kühn\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2407,7 +2407,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isan\": \"978-0-007-00644-1\",\r\n  \"rating\": 1,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 99.99,\r\n  \"rabatt\": 0.123,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n    \"untertitel\": \"untertitelpost\"\r\n  },\r\n  \"mehrereschauspieler\": [{\r\n    \"vorname\": \"Thomas\",\r\n    \"nachname\": \"Kühn\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"isan\": \"1881-66C7-3420-0006\",\r\n  \"rating\": 1,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 99.99,\r\n  \"rabatt\": 0.123,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"titel\": {\r\n    \"titel\": \"Titelpost\",\r\n    \"untertitel\": \"untertitelpost\"\r\n  },\r\n  \"mehrereschauspieler\": [{\r\n    \"vorname\": \"Thomas\",\r\n    \"nachname\": \"Kühn\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2557,7 +2557,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isan\": \"978-0-201-63361-0\",\r\n  \"rating\": 5,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"isan\": \"1881-66C7-3420-0002\",\r\n  \"rating\": 5,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2618,7 +2618,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isan\": \"978-0-201-63361-0\",\r\n  \"rating\": 5,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"isan\": \"1881-66C7-3420-0002\",\r\n  \"rating\": 5,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2679,7 +2679,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isan\": \"978-0-201-63361-0\",\r\n  \"rating\": 5,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"isan\": \"1881-66C7-3420-0002\",\r\n  \"rating\": 5,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2740,7 +2740,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isan\": \"978-0-201-63361-0\",\r\n  \"rating\": 5,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"isan\": \"1881-66C7-3420-0002\",\r\n  \"rating\": 5,\r\n  \"genre\": \"FANTASY\",\r\n  \"preis\": 3333,\r\n  \"rabatt\": 0.33,\r\n  \"lieferbar\": true,\r\n  \"datum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
