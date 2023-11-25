@@ -58,7 +58,7 @@ import { dbType } from '../../config/dbtype.js';
 /**
  * Alias-Typ für gültige Strings bei dem Genre eines Films.
  */
-export type FilmGenre = 'FANTASY' | 'HORROR' | 'ACTION' | 'SCIENCEFICTION' | 'DRAMA';
+export type FilmGenre = 'FANTASY' | 'HORROR' | 'ACTION' | 'SCIENCEFICTION';
 
 /**
  * Entity-Klasse zu einem relationalen Tabelle
