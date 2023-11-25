@@ -69,7 +69,7 @@ package film.entity {
   }
 
   Film *--> "1" Titel : @OneToOne() \ntitel
-  Film *--> "*" Schauspieler : @OneToMany() \nabbildungen
+  Film *--> "*" Schauspieler : @OneToMany() \nmehrereschauspieler
 
   Film .right.> Entity
   Film .right.> FilmGenre
