@@ -97,7 +97,7 @@ services:
   # ----------------------------------------------------------------------------
   # http://localhost:8888 mit Emailadresse "pgadmin@acme.com" und Passwort "p"
   pgadmin:
-    image: dpage/pgadmin4:7.7
+    image: dpage/pgadmin4:8.0
     ports:
       - published: 8888
         target: 80
