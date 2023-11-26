@@ -132,7 +132,7 @@ pipeline {
                 sh 'cat package.json'
 
                 // Konfigurationsverzeichnis /root/.npm
-                sh 'npm ci --no-fund --no-audit'
+                // sh 'npm ci --no-fund --no-audit'
             }
         }
 
@@ -184,10 +184,10 @@ pipeline {
                   //]
 
                   publishHTML (target : [
-                      reportDir: '.extras/doc/projekthandfilm/html',
-                      reportFiles: 'projekthandfilm.html',
-                      reportName: 'Projekthandfilm',
-                      reportTitles: 'Projekthandfilm'
+                      reportDir: '.extras/doc/projekthandbuch/html',
+                      reportFiles: 'projekthandbuch.html',
+                      reportName: 'Projekthandbuch',
+                      reportTitles: 'Projekthandbuch'
                   ])
 
                   publishHTML target : [
