@@ -73,7 +73,7 @@ pipeline {
                 sh 'rm -rf dist'
                 sh 'rm -rf .extras/doc/api'
                 sh 'rm -rf .extras/doc/folien/folien.html'
-                sh 'rm -rf .extras/doc/projekthandfilm/html'
+                sh 'rm -rf .extras/doc/projekthandbuch/html'
 
                 // https://www.jenkins.io/doc/pipeline/steps/git
                 // "named arguments" statt Funktionsaufruf mit Klammern
