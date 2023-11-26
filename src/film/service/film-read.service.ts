@@ -6,6 +6,7 @@
 import { Film, type FilmGenre } from './../entity/film.entity.js';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { QueryBuilder } from './query-builder.js';
+// eslint-disable-next-line @typescript-eslint/naming-convention
 import RE2 from 're2';
 import { getLogger } from '../../logger/logger.js';
 
