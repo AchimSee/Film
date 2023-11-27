@@ -15,7 +15,6 @@ import { Film } from '../entity/film.entity.js';
 import { FilmReadService } from './film-read.service.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MailService } from '../../mail/mail.service.js';
-// eslint-disable-next-line @typescript-eslint/naming-convention
 import RE2 from 're2';
 import { Schauspieler } from '../entity/schauspieler.entity.js';
 import { Titel } from '../entity/titel.entity.js';
